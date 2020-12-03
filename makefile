@@ -1,4 +1,4 @@
-SECTIONS=00_abstract.md 01_intro.md 02_methods.md 03_results.md 04_discussion.md 05_conclusion.md
+SECTIONS=abstract.md intro/intro.md methods/methods.md results/results.md discussion/discussion.md conclusion/conclusion.md
 FORMAT=format.yaml
 
 MANUSCRIPT=artemis_methods.pdf
