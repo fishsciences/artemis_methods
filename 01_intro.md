@@ -13,7 +13,6 @@ place during qPCR. The eDNA concentration ([eDNA]) is then related to
 Cq via a standard curve generated in the lab for the target
 species. This standard curve formula typically takes the form:
 
-
 The standard curve is specific to the lab reagents and techniques
 used. The implication of this is that models using Cq values (or a
 derived value such as “positive detection”) as the response result in
