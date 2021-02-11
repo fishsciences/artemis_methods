@@ -63,3 +63,4 @@ qPCR data from eDNA studies are often modeled via occupancy models
 al. 2014; Song et al. 2017; Hinlo et al. 2017).  These are both
 suitable, but there are several characteristics of eDNA data which
 made us feel that it would benefit from a different modeling approach.
+
