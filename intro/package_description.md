@@ -2,18 +2,77 @@
 
 <!-- adapted from vignette -->
 
-The `artemis` R package was created to aid in the design and analysis
-of environmental DNA (eDNA) survey studies by offering a custom suite
-of models for quantitative polymerase chain reaction (qPCR) data from
-extracted eDNA samples. Data from eDNA sampling surveys is often
-analyzed with occupancy models or GLMS, but there are several
-characteristics of qPCR data in particular which made us feel that it
-would benefit from a different modeling approach.  Specifically, our
-approach to this data makes use of Bayesian truncated latent variable
-models written in [Stan](mc-stan.org).
+### Common qPCR eDNA analyses
+
+qPCR data from eDNA studies are often modeled via a binary response
+model, e.g. occupancy models (Schmidt et al 2013) or some form of
+binomial regression (Moyer et al. 2014; Song et al. 2017; Hinlo et
+al. 2017). In these, the response variable is a binary variable
+signifying the presence/absence of eDNA in the sample. This binary
+variable commonly indicates whether a sample had a Cq value below the
+threshold, though studies vary on the unit of study, e.g. a technical
+replicate, filter, or sampling point or occurnace. Regardless, these
+analysis methods allow for easy estimation of various covariates on
+the probability of presence using off-the-shelf analysis programs. 
+
+However, these methods which use a binary response variable have a
+significant weakness - they are dependent on the cut-off point which
+defines a non-detection. A "non-detection" is more appropriately
+defined as a concentration below a pre-specified cutoff threshold.  As
+discussed previously, this cutoff threshold is a function of the
+standard curve and researcher decisions. The [eDNA] which corresponds
+to the maximum Cq value for a particular set of extractions varies
+between studies.  For example, some analyses use a maximum Cq
+threshold of 40 cycles, while others use 50 cycles. Therefore,
+"presence" in different studies actually refers to different
+concentrations of eDNA between the two studies. Hence there is a
+trade-off; the ease of analysis within a study verses difficulty in
+comparing between studies.
+
+One solution to this quandary is to model either the Cq values
+themselves or a concentration/copy number (as back-calculated from the
+Cq values via the standard curve) as a continuous response variable.
+This response variable is then analyzed using a linear model to
+estimate the effects of various covariates on [eDNA].  Similar to the
+binary response variable, this can be accomplished using common
+statistical software. However, while this addresses some issues
+related to using a binary response variable, the response variable is
+still dependent on a particular standard curve. Since the standard
+curve defines the concentration at which further qPCR cycles are not
+attempted, the standard curve defines a censoring point for the
+response variable.
+
+Statistican censoring is a well studied phenomenon where data values
+above or below a certain threshold value are recorded as the threshold
+value. In effect, this represents a partially missing value - it is
+known that the value is beyond the threshold, but its exact value is
+unknown. A naive analysis of censored data which does not take this
+into account will underestimate uncertainty in values near or at the
+threshold. In eDNA studies, this means that when [eDNA] values are
+relatively large, i.e. far from the censoring point, the censoring
+point has negligable impact on the analysis. When values are near the
+censoring point, estimates will be biased. 
+
+
+Therefore, there is a need to take the above into consideration in the
+analysis, while also providing the ease of use of common statistical
+programs. 
+
+Data from eDNA sampling surveys is often analyzed with occupancy
+models or GLMS, but there are several characteristics of qPCR data in
+particular which made us feel that it would benefit from a different
+modeling approach.  Specifically, our approach to this data makes use
+of Bayesian truncated latent variable models written in
+[Stan](mc-stan.org).
 
 
 ### Modeling qPCR eDNA Data with `artemis`
+
+
+The `artemis` R package was created to aid in the design and analysis
+of eDNA survey studies by offering a custom suite
+of models for quantitative polymerase chain reaction (qPCR) data from
+extracted eDNA samples. 
 
   1. In eDNA samples that are extracted and run through qPCR analysis,
      the concentration of eDNA is not directly measured. Instead, the
@@ -35,7 +94,7 @@ models written in [Stan](mc-stan.org).
      quantification cycles are not attempted. Therefore,
      "non-detection" is taken to be any sample which requires more
      than the threshold number of cycles to detect. Failing to account
-     for this data truncation process can result in increased
+     for this data censoring process can result in increased
      uncertainty and bias in our estimates of the effect sizes.
   
   3. The potential sources of measurement error in the extraction and
@@ -99,7 +158,7 @@ which:
   - are modeled directly on $log[eDNA]$ rather than Cq, *therefore are independent
 	of the standard curve and can be compared between studies*.
   
-  - account for the data truncation at the upper limit of qPCR
+  - account for the data censoring at the upper limit of qPCR
     cycles, *which reduces uncertainty and bias in the estimates.*
 	
   - directly model the measurement error on qPCR extraction, *allowing

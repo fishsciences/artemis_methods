@@ -3,6 +3,8 @@
 
 <!-- Background info about eDNA studies generally -->
 
+
+
 ## Estimating [eDNA] via qPCR
 
 In eDNA samples, the amount of eDNA present in the sample is estimated
@@ -43,8 +45,9 @@ that produced by error introduced in the pipetting process during
 extraction, but they have the same effect on Cq (namely, increasing
 variability).  
 
-We addressed these issues by directly modeling the
-effect of the predictors on the latent (unobserved) variable, eDNA
+We addressed these issues by creating the `artemis` package for R. In
+`artemis`, we implement a model which directly estimates the effect of
+the predictors on the latent (unobserved) variable, eDNA
 concentration. This is accomplished by linking eDNA concentration to
 the observed response via the standard curve parameters.  The goal of
 this paper is to introduce this truncated latent variable model in the
@@ -53,14 +56,4 @@ commonly-used modeling approaches in the field: occupancy modeling for
 deriving the probability of detection, and binomial regression
 (beta-binomial, negative binomial, and logistic regression).
 
-The implication of this is that models using Cq values (or a
-derived value such as “positive detection”) as the response result in
-estimates of effect sizes which cannot be directly compared between
-different studies using different standard curves. 
-
-qPCR data from eDNA studies are often modeled via occupancy models
-(Schmidt et al 2013) or some form of binomial regression (Moyer et
-al. 2014; Song et al. 2017; Hinlo et al. 2017).  These are both
-suitable, but there are several characteristics of eDNA data which
-made us feel that it would benefit from a different modeling approach.
 
