@@ -105,16 +105,17 @@ measurement error from the true Cq value ($\hat{Cq_i}$) in
 extract. Thus, `artemis` accounts for measurement error in this
 conversion. 
 
-$$ Cq_i \sim Normal(\hat{Cq_i}, \sigma_{Cq}) $$
+$$ Cq_i \sim Trunc. Normal(\hat{Cq_i}, \sigma_{Cq}, U) $$
 
-While the observed Cq values, $Cq_i$, are censored at the
-predetermined threshold, U, the $\hat{Cq_i}$ values in the model are
-not. The likelihood that a sampled Cq value will exceed the threshold,
-given measurement error in the process and an estimated $\hat{Cq_i}$
-value is given by the normal cumulative distribution function,
-$\Phi()$,
+Where the observed Cq values, $Cq_i$, are censored at the
+predetermined threshold, U, Importantly, the $\hat{Cq_i}$ values in
+the model are not, allowing the latent variable to reflect the "true"
+[eDNA] beyond the censorship point. The likelihood that a sampled Cq
+value will exceed the threshold, given measurement error in the
+process and an estimated $\hat{Cq_i}$ value is given by the normal
+cumulative distribution function, $\Phi()$,
 
-$$ Pr[Cq_i > U ] = 1 - \Phi(\hat{Cq_hat} - \mu / \sigma)$$
+$$ Pr[Cq_i > U ] = 1 - \Phi(\hat{Cq_i} - \mu / \sigma)$$
 
 Thus, `artemis` accounts for the the data censoring process. As
 detection limits vary with genetic assay, the upper threshold on Cq in

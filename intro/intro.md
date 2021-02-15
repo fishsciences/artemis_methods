@@ -29,13 +29,13 @@ the [eDNA] concentration is zero, this is often not
 practical. Therefore, the threshold for Cq values typically
 corresponds to a non-zero eDNA concentration.  Since “non-detection”
 is taken to be any sample which requires more than the threshold
-number of cycles to detect, there is a data truncation process
+number of cycles to detect, there is a data censoring process
 occuring. Crucially, because the Cq values are dependent on the
-standard curve and hence specifics to a particular lab, the truncation
+standard curve and hence specifics to a particular lab, the censoring
 point is also lab dependent. 
 
-This truncation process can create several issues for analyzing eDNA
-data. First, not taking this data truncation process into account in
+This censoring process can create several issues for analyzing eDNA
+data. First, not taking this data censoring process into account in
 the analysis can lead to biases in model estimates. Second, potential
 sources of measurement error in the extraction and qPCR processes are
 difficult to separate and quantify. For example, Cq values produced by
