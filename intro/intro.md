@@ -10,10 +10,11 @@
 In eDNA samples, the amount of eDNA present in the sample is estimated
 from the number of quantification cycles of qPCR (hereafter referred
 to as the “Cq” value) completed before amplification takes place
-during qPCR. The relationship between eDNA concentration ([eDNA]) and
-Cq values is determined via a standard curve generated in the lab for
-the target species. This standard curve formula typically takes the
-form:
+during qPCR. In eDNA samples that are extracted and run through qPCR
+analysis, the concentration of eDNA is not directly measured. The
+relationship between eDNA concentration ([eDNA]) and Cq values is
+determined via a standard curve generated in the lab for the target
+species. This standard curve formula typically takes the form:
 
 $$ Cq = \beta * log([eDNA]) + \alpha $$
 

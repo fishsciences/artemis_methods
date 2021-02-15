@@ -42,62 +42,32 @@ curve defines the concentration at which further qPCR cycles are not
 attempted, the standard curve defines a censoring point for the
 response variable.
 
-Statistican censoring is a well studied phenomenon where data values
+Statistical censoring is a well studied phenomenon where data values
 above or below a certain threshold value are recorded as the threshold
 value. In effect, this represents a partially missing value - it is
 known that the value is beyond the threshold, but its exact value is
 unknown. A naive analysis of censored data which does not take this
 into account will underestimate uncertainty in values near or at the
 threshold. In eDNA studies, this means that when [eDNA] values are
-relatively large, i.e. far from the censoring point, the censoring
+relatively high, i.e. far from the censoring point, the censoring
 point has negligable impact on the analysis. When values are near the
 censoring point, estimates will be biased. 
-
 
 Therefore, there is a need to take the above into consideration in the
 analysis, while also providing the ease of use of common statistical
 programs. 
 
-Data from eDNA sampling surveys is often analyzed with occupancy
-models or GLMS, but there are several characteristics of qPCR data in
-particular which made us feel that it would benefit from a different
-modeling approach.  Specifically, our approach to this data makes use
-of Bayesian truncated latent variable models written in
-[Stan](mc-stan.org).
-
-
 ### Modeling qPCR eDNA Data with `artemis`
 
+To address the above weaknesses of common statistical analysis
+techniques qPCR eDNA data, we created the `artemis` R package. At its
+core, `artemis` implements a Bayesian censored latent variable models
+written in [Stan](mc-stan.org).  Additionally, `artemis` includes
+utilities to aid in the design and analysis of eDNA survey studies,
+including simulation and power analysis functions. 
 
-The `artemis` R package was created to aid in the design and analysis
-of eDNA survey studies by offering a custom suite
-of models for quantitative polymerase chain reaction (qPCR) data from
-extracted eDNA samples. 
-
-  1. In eDNA samples that are extracted and run through qPCR analysis,
-     the concentration of eDNA is not directly measured. Instead, the
-     amount of eDNA present is represented as a function of the number
-     of quantification cycles of qPCR (hereafter referred to as the
-     "Cq" value) completed before amplification takes place. eDNA
-     concentration ($[eDNA]$) is then related to Cq via a standard
-     curve generated in the lab for the target species. This standard
-     curve formula typically takes the form: $$Cq = log[eDNA] *
-     \beta + \alpha$$ The standard curve is specific to the lab
-     reagents and techniques used. The implication of this is that
-     models using Cq values (or a derived value such as a "positive"
-     detection) as the response result in estimates of effect sizes
-     which cannot be directly compared between different studies using
-     different standard curves.
-	 
-  2. A higher Cq value corresponds to a lower concentration of eDNA in
-     a sample. Above a pre-determined threshold, additional
-     quantification cycles are not attempted. Therefore,
-     "non-detection" is taken to be any sample which requires more
-     than the threshold number of cycles to detect. Failing to account
-     for this data censoring process can result in increased
-     uncertainty and bias in our estimates of the effect sizes.
-  
-  3. The potential sources of measurement error in the extraction and
+  <!-- 
+  3. The potential sources of measurement error in the extraction and -->
      qPCR processes are difficult to separate and quantify. For
      example, Cq values produced by qPCR become more variable at the
      threshold of detection, i.e. as the number of eDNA molecules
@@ -105,34 +75,57 @@ extracted eDNA samples.
      variability in the response is different from that produced by
      error introduced in the pipetting process, but they have the same
      effect on Cq (namely, increasing variability).
-	 
-The `artemis` package addresses these issues by directly modeling the
-effect of the predictors on the latent (unobserved) variable, eDNA
-concentration. It does this by linking eDNA concentration to the
-observed response via the parameters of an associated standard
-curve. The general model is as follows:
+-->
 
-$$ Cq_i \sim Normal(\hat{Cq_i}, \sigma_{Cq}) $$
-$$\hat{Cq_i} = \alpha_{std\_curve} + \beta_{std\_curve}* log[eDNA]_i  $$
+The `artemis` package addresses these weaknesses via several
+techniques. At its core, `artemis` is a specialized Generalized Linear
+Model, where the predictors are assumed to additively affect the
+response variable, in this case $log[eDNA]$, 
+
 $$ log[eDNA]_{i} = X_{i} \beta $$ 
 
 where $\beta$ is a vector of effects on $log[eDNA]$, $X$ is the model
 matrix of predictors and $\alpha_{std\_curve}$ and
 $\beta_{std\_curve}$ are fixed values provided by the standard curve.
+Since `artemis` directly models the
+effect of the predictors on the latent (unobserved) variable, eDNA
+concentration, it is unnecessary for the researcher to
+back-transform the data prior to modeling. Internally, `artemis`
+conducts this conversion, 
 
-Additionally, there is a zero-inflated component in the model. From
+$$\hat{Cq_i} = \alpha_{std\_curve} + \beta_{std\_curve}* log[eDNA]_i  $$
+
+Instead, the coefficients for the standard curve equation
+($\alpha_{std\_curve}$ and $\beta_{std\_curve}$) are provided to the
+modeling function.
+
+
+Internally, the observed Cq value ($Cq_i$) is considered a sample with
+measurement error from the true Cq value ($\hat{Cq_i}$) in
+extract. Thus, `artemis` accounts for measurement error in this
+conversion. 
+
+$$ Cq_i \sim Normal(\hat{Cq_i}, \sigma_{Cq}) $$
+
+While the observed Cq values, $Cq_i$, are censored at the
+predetermined threshold, U, the $\hat{Cq_i}$ values in the model are
+not. The likelihood that a sampled Cq value will exceed the threshold,
+given measurement error in the process and an estimated $\hat{Cq_i}$
+value is given by the normal cumulative distribution function,
+$\Phi()$,
+
+$$ Pr[Cq_i > U ] = 1 - \Phi(\hat{Cq_hat} - \mu / \sigma)$$
+
+Thus, `artemis` accounts for the the data censoring process. As
+detection limits vary with genetic assay, the upper threshold on Cq in
+the model is adjustable by the user. 
+
+Lastly, there is an optional zero-inflated component in the model. From
 multiple experiments, it was observed there can be near-zero
 concentrations of eDNA even in situations where higher concentrations
 were expected. This was attributed to filter failures. The expected
 probability of this occuring is user-provided, and allows for "true"
-zero observations when set to a value greater than 0.
-
-As detection limits vary with genetic assay, the upper threshold on Cq
-in the model is adjustable.  Any values of $\hat{Cq_i}$ which are
-greater than the upper limit on $Cq_i$ are recorded as the threshold
-value.  For example, a $\hat{Cq_i}$ value of 42 is recorded as 40 when
-the upper limit is 40 cycles.
-
+zero observations
    
 This model formulation makes several assumptions:
  
@@ -154,7 +147,6 @@ error in both the field collection and qPCR stages.*
 Importantly, this formulation produces estimates of the effect sizes
 which:
 
-
   - are modeled directly on $log[eDNA]$ rather than Cq, *therefore are independent
 	of the standard curve and can be compared between studies*.
   
@@ -165,10 +157,8 @@ which:
     quantification of the amount of uncertainty attributable to
     uncertainty in the effect sizes vs. lab procedure.*
 
-In `artemis`, the model is specified using a model formula, similar to
-the `lm()` or `lmer()` functions. This model formula is used to
-construct the model on $log[eDNA]$.
-
-The functions in `artemis` generalize to any eDNA survey data
-containing Cq values associated with a standard curve for the target
-species.
+In `artemis`, the model is specified using an R model formula, similar
+to the `lm()` or `lmer()` functions. This model formula is used to
+construct the model on $log[eDNA]$. The functions in `artemis`
+generalize to any eDNA survey data containing Cq values associated
+with a standard curve for the target species.
