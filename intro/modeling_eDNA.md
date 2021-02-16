@@ -1,4 +1,4 @@
-## Modeling [eDNA]
+## Analyzing [eDNA] data
 
 <!-- adapted from vignette -->
 
