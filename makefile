@@ -3,10 +3,11 @@ INTRO = intro/intro.md intro/eDNA_background.md intro/estimating_eDNA.md intro/m
 METHODS = methods/methods.md
 SECTIONS=abstract.md $(INTRO) $(METHODS) results/results.md discussion/discussion.md conclusion/conclusion.md
 FORMAT=format.yaml
+BIB=artemis.bib
 
 MANUSCRIPT=artemis_methods.pdf
 
-$(MANUSCRIPT): $(SECTIONS) $(FORMAT)
-	pandoc -o $@ $^
+$(MANUSCRIPT): $(SECTIONS) $(FORMAT) $(BIB)
+	pandoc artemis.bib -s -F pandoc-citeproc -o $@ $^
 
 all: $(MANUSCRIPT)
