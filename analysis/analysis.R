@@ -3,11 +3,55 @@
 library(elaphos)
 library(artemis)
 library(rstanarm)
+library(loo)
 
-mod_binom = stan_glm(I(Cq < 40) ~ Distance_m + Volume_mL,
-                data = cvp02, family = "binomial")
+# Set once here so we can easily swap the experiment here
+d = cvp02
 
-mod_norm = lm(Cq ~ Distance_m + Volume_mL, cvp02)
+#------------------------------------------------------------------------------#
+# single experiment 
 
-mod_art = eDNA_lm(Cq ~ Distance_m + Volume_mL, cvp02, 21, -1.5)
+# Need standard curve
+i = match(d$StdCrvID, StdCrvKey$StdCrvID)
+a = StdCrvKey$StdCrvAlpha_lnForm[i]
+b = StdCrvKey$StdCrvBeta_lnForm[i]
 
+mod_art = eDNA_lm(Cq ~ Distance_m + Volume_mL,
+                  data = d,
+                  std_curve_alpha = a,
+                  std_curve_beta = b)
+
+# Manual back-conversion to log[eDNA]
+# a + b * x = y
+# (y - a) / b
+d$ln_eDNA = (d$Cq - a) / b
+
+mod_lm = stan_glm(ln_eDNA  ~ Distance_m + Volume_mL,
+                data = d, family = "gaussian")
+
+# comparison: prediction - errors
+loo_art = artemis::loo(mod_art)
+loo_lm = loo(mod_lm)
+
+loo_compare(loo_art, loo_lm)
+
+#------------------------------------------------------------------------------#
+# random effects
+
+
+mod_arter = eDNA_lmer(Cq ~ Distance_m + Volume_mL + (1|FilterID),
+                  data = d,
+                  std_curve_alpha = a,
+                  std_curve_beta = b)
+
+mod_lmer = stan_glmer(ln_eDNA  ~ Distance_m + Volume_mL + (1|FilterID),
+                data = d, family = "gaussian")
+
+# comparison: prediction - errors
+loo_arter = artemis::loo(mod_arter)
+loo_lmer = loo(mod_lmer)
+
+loo_compare(art = loo_art, art_lmer = loo_arter, loo_lm, loo_lmer)
+#------------------------------------------------------------------------------#
+# visualize
+library(bayesplot)
