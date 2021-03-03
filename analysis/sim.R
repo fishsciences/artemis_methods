@@ -1,41 +1,40 @@
 # Simulation and fitting of models
 library(ggplot2)
+library(artemis)
+library(rstanarm)
+options(mc.cores = 12L)
 # basic simulation of ln[eDNA]
 # Using the generative model in the manuscript
 
-set.seed(123)
-# constants
-intercept = -12
-ln_sd = 1.5
-beta_dist = -4
-beta_vol = 0.05
-distance_km = seq(0,1, length.out = 10)
-volume_mL = c(50,100)
-filterID = 1:3
-tech_reps = 1:3
-std_alpha = 21.5
-std_beta = -1.5
-upper_Cq = 40
-filter_u = rnorm(length(filterID), 0, 1) # random effect on filter
+# Set to TRUE to re-run the simulations
+# the artemis fits take a while to complete
+run_sims = FALSE
 
-d = expand.grid(dist_km = distance_km,
-                filterID = filterID,
-                tech_rep = tech_reps,
-                volume_mL = volume_mL)
+#------------------------------------------------------------------------------#
+# functions
+source("funs.R")
+#------------------------------------------------------------------------------#
+# replicated estimates
+# make N datasets
+if(run_sims){
+set.seed(1234)
+n_sim = 100
+sim_datasets = replicate(100, rep_dataset(), simplify = FALSE)
 
-d$ln_eDNA_hat = intercept +
-    beta_dist * d$dist_km +
-    beta_vol * d$volume_mL +
-    filter_u[d$filterID]
 
-d$ln_eDNA = rnorm(nrow(d), d$ln_eDNA_hat, ln_sd)
-d$Cq = d$ln_eDNA * std_beta + std_alpha
-d$Cq[d$Cq > upper_Cq] = upper_Cq
-d$ln_eDNA_backtransform = (d$Cq - std_alpha) / std_beta
-summary(d)
+lmer_ests = lapply(sim_datasets, fit_and_extract, fun = stan_glmer,
+                   model_formula = ln_eDNA_backtransform ~ dist_km + volume_mL + (1|filterID))
+lmer_ests = do.call(rbind, lmer_ests)
+saveRDS(lmer_ests, file = "lmer_sim_results.rds")
 
-plot(Cq ~ dist_km, d)
+arter_ests = lapply(sim_datasets, fit_and_extract, fun = eDNA_lmer, std_curve_alpha = 21.5, std_curve_beta = -1.5)
+arter_ests = do.call(rbind, arter_ests)
+saveRDS(arter_ests, file = "art_sim_results.rds")
+}
+#------------------------------------------------------------------------------#
 
+# Old Stuff
+if(FALSE){
 #----------------------------------------#
 # fit models to simulated data
 library(artemis)
@@ -59,3 +58,4 @@ mod_arter = eDNA_lmer(Cq ~ dist_km + volume_mL+ (1|filterID), d,
 
 summary(mod_lmer2)
 summary(mod_arter)
+}
