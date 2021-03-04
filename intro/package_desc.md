@@ -13,7 +13,7 @@ First, the modeling functions are intended to be drop-in replacements
 for `lm()` or `glm()` while utilizing the generative model as outlined
 previously. An example call to the modeling function `eDNA_lm()` is,
 
-```{r}
+```
 eDNA_lm(Cq ~ Distance_m, 
         data = eDNA_data,
         std_curve_alpha = 21.2, std_curve_beta = -1.5)
@@ -69,7 +69,7 @@ the number of simulations to generate.
 
 An example of a simulation call with random effects,
 
-```{r eval = FALSE, warning = FALSE}
+```
 sim_eDNA_lmer(Cq ~ distance + volume + (1|rep) + (1|tech_rep),
               variable_list = vars,
               betas = c(intercept = -10.6, distance = -0.05, volume = 0.01),
