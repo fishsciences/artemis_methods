@@ -8,6 +8,9 @@ BIB=artemis.bib
 MANUSCRIPT=artemis_methods.pdf
 
 $(MANUSCRIPT): $(SECTIONS) $(FORMAT) $(BIB)
-	pandoc artemis.bib -s -F pandoc-citeproc -o $@ $^
+	pandoc -o $@ $^
+
+test.md: $(SECTIONS) $(FORMAT) $(BIB)
+	pandoc artemis.bib --verbose --citeproc -o $@ $^
 
 all: $(MANUSCRIPT)
