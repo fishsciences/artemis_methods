@@ -52,6 +52,6 @@ loo_arter = artemis::loo(mod_arter)
 loo_lmer = loo(mod_lmer)
 
 loo_compare(art = loo_art, art_lmer = loo_arter, loo_lm, loo_lmer)
+
 #------------------------------------------------------------------------------#
-# visualize
-library(bayesplot)
+# Out of sample predictions

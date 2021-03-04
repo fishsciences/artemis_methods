@@ -57,7 +57,7 @@ Therefore, there is a need to take the above into consideration in the
 analysis, while also providing the ease of use of common statistical
 programs. 
 
-### Modeling qPCR eDNA Data with `artemis`
+### Modeling qPCR eDNA Data with `artemis` {#mod_str}
 
 To address the above weaknesses of common statistical analysis
 techniques qPCR eDNA data, we created the `artemis` R package. At its

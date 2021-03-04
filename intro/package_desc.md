@@ -10,7 +10,7 @@ categories;
 
 
 First, the modeling functions are intended to be drop-in replacements
-for `lm()` or `glm()` while utilizing the generative model as outlined
+for `lm()` or `glm()` [@R] while utilizing the generative model as outlined
 previously. An example call to the modeling function `eDNA_lm()` is,
 
 ```
@@ -28,7 +28,7 @@ Cq ~ predictors
 
 Although the model technically uses the latent variable [eDNA] as the
 response to the predictors, the formula is expressed on Cq to avoid
-potential confusion regarding the user specifying a column which does
+potential confusion regarding the user potentially specifying a column which does
 not exist in the input data.frame. 
 
 Internally, the conversion between Cq and [eDNA] is conducted using
@@ -39,7 +39,7 @@ curves within the same model. Thus, data from different studies can
 easily be analyzed together.
 
 For mixed-effects models, the modeling function `eDNA_lmer()` can be
-used. The formula syntax follows the convention of `lmer()` and
+used. The formula syntax follows the convention of `lmer()` [@lme4] and
 specifies the random effects in the model with,
 
 ```
@@ -48,7 +48,7 @@ specifies the random effects in the model with,
 ```
 
 Both model types are fit using a Bayesian model fit via the Stan MCMC
-program. Additional parameters can be passed to control the MCMC via
+program [@stan]. Additional parameters can be passed to control the MCMC via
 the `...` arguments in either modeling function.
 
 Next, the simulation functions `sim_eDNA_lm()` and
@@ -81,5 +81,6 @@ sim_eDNA_lmer(Cq ~ distance + volume + (1|rep) + (1|tech_rep),
 ```
 
 The `artemis` package also includes methods for R's `plot()`,
-`summary()`, `data.frame()`, and `predict()` functions.
+`summary()`, `data.frame()`, and `predict()` functions for the
+`eDNA_model` and `eDNA_simulation` classes.
 

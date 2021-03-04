@@ -19,7 +19,7 @@ Effect sizes
 To demonstrate the strength and utility of the `artemis` package for
 modeling eDNA data, we compare `artemis` models to standard
 mixed-effects analysis.  We simulated one hundred datasets using the
-generative process outlined in (section ref).  Then, we used two
+generative process outlined previously [Modeling eDNA](#mod_str).  Then, we used two
 different eDNA modeling approaches, a linear mixed-effects model and
 `artemis`'s censored-data mixed-effects model to attempt to estimate
 the original parameters used to simulated the data. 
@@ -27,11 +27,11 @@ the original parameters used to simulated the data.
 For this task, only models which directly estimate effects on the
 latent or backtransformed ln[eDNA] values were compared. To further
 make the results more directly comparible, the mixed-effects model was
-fit using the `rstanarm` R package, a Bayesian modeling package. The
+fit using the `rstanarm` R package(v2.21.1, @rstanarm), a Bayesian modeling package. The
 `rstanarm` and `artemis` packages both use the Stan probabilistic
-programming language to estimate parameters. Furthermore, many of the
-defaults in `artemis` functions mirror those in `rstanarm`, which in
-turn mirror those of the `(g)lm` and `(g)lmer` functions. For the
+programming language to estimate parameters [@stan]. Furthermore, many of the
+defaults in `artemis` functions mirror those in `rstanarm` , which in
+turn mirror those of the `(g)lm` [@R] and `(g)lmer` [@lme4] functions. For the
 purposes of this demonstration, we simulated an experiment with two
 different filtered volumes, 50 and 100mL, and ten different distances
 from eDNA emission source spread equidistant from 0 to 1000
