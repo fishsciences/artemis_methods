@@ -14,3 +14,6 @@ test.md: $(SECTIONS) $(FORMAT) $(BIB)
 	pandoc artemis.bibtex --verbose --citeproc -o $@ $^
 
 all: $(MANUSCRIPT)
+
+model:
+	$(MAKE) -C analysis
