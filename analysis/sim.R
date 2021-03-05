@@ -18,19 +18,21 @@ source("funs.R")
 # make N datasets
 if(run_sims){
 set.seed(1234)
-n_sim = 100
-sim_datasets = replicate(100, rep_dataset(), simplify = FALSE)
+n_sim = 500
+sim_datasets = replicate(n_sim, rep_dataset(), simplify = FALSE)
 
 
 lmer_ests = lapply(sim_datasets, fit_and_extract, fun = stan_glmer,
-                   model_formula = ln_eDNA_backtransform ~ dist_km + volume_mL + (1|filterID))
-lmer_ests = do.call(rbind, lmer_ests)
+                   model_formula = ln_eDNA_backtransform ~ dist_km + volume_mL + (1|filterID),
+                   extract_fun = summary_stan)
+## lmer_ests = do.call(rbind, lmer_ests)
 saveRDS(lmer_ests, file = "lmer_sim_results.rds")
 
-arter_ests = lapply(sim_datasets, fit_and_extract, fun = eDNA_lmer, std_curve_alpha = 21.5, std_curve_beta = -1.5)
-arter_ests = do.call(rbind, arter_ests)
+arter_ests = lapply(sim_datasets, fit_and_extract, fun = eDNA_lmer, std_curve_alpha = 21.5, std_curve_beta = -1.5,
+                    extract_fun = summary_artemis)
+## arter_ests = do.call(rbind, arter_ests)
 saveRDS(arter_ests, file = "art_sim_results.rds")
-}
+ }
 #------------------------------------------------------------------------------#
 
 # Old Stuff

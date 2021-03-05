@@ -45,3 +45,16 @@ fixef.eDNA_model = function(object, ...){
     tmp = summary(object, ...)
     structure(tmp$Mean, names = rownames(tmp))
 }
+
+summary_stan = function(x, p = c(0.05,0.5, 0.95),
+                        r = c(1:3, 7),
+                        c= 4:6)
+{
+    summary(x, probs = p)[r, c]
+}
+
+summary_artemis = function(x, p = c(0.05,0.5,0.95),
+                           c = 2:4)
+{
+    summary(x, probs = p)[,2:4]
+}
