@@ -1,15 +1,14 @@
+---
+---
+
 # Tables
 
-```{r echo = FALSE}
-m_loo = readRDS("output/compare_loo.rds")
-# not robust
-rownames(m_loo) = c("artemis: mixed-effects", "rstanarm: mixed-effects",
-                    "artemis: fixed-effects", "rstanarm: fixed-effects")
-knitr::kable(m_loo[,c("looic", "p_loo", "elpd_diff", "se_diff")], digits = 1, caption = "Model comparison using Pareto-Smoothed Leave-One-Out Information Criteria")
-
+```{r echo = FALSE, messages = FALSE, include = FALSE}
+library(rstanarm)
+library(artemis)
 ```
 
-```{r echo = FALSE}
+```{r echo = FALSE, messages = FALSE}
 m1 = readRDS("output/rstanarm_lmer_fit.rds")
 m2 = readRDS("output/artemis_lmer_fit.rds")
 m1_pars = c("(Intercept)", "Distance_m",
@@ -21,14 +20,23 @@ m1_ci = signif(m1_ci, 2)
 m1_sum = summary(m1, pars = m1_pars, probs = c(0.05, 0.5, 0.95))
 m1_sum = signif(m1_sum, 2)
 m2_sum = signif(summary(m2, probs = c(0.05, 0.5, 0.95)), 2)
-m_summary = rbind("rstanarm: mixed-effects" = m1_sum[,1],
+m_summary = rbind("rstanarm" = m1_sum[,1],
                   "    90% CI" = apply(m1_sum[,c(4,6)], 1, paste, collapse = " -- "),
-                  "artemis: mixed-effects" = m2_sum[,1],
+                  "artemis" = m2_sum[,1],
                   "    90% CI" = apply(m2_sum[,c(2,4)], 1, paste, collapse = " -- "))
       
-knitr::kable(t(m_summary), align = "c")
+knitr::kable(t(m_summary), align = "c", caption = "Model estimates and 90% credible intervals for the fixed-effect parameters from the `rstanarm` and `artemis` packages fit to the same data")
 
 ```
 
 
+
+```{r echo = FALSE, messages = FALSE}
+m_loo = readRDS("output/compare_loo.rds")
+# not robust
+rownames(m_loo) = c("artemis: mixed-effects", "rstanarm: mixed-effects",
+                    "artemis: fixed-effects", "rstanarm: fixed-effects")
+knitr::kable(m_loo[,c("looic", "p_loo", "elpd_diff", "se_diff")], digits = 1, caption = "Model comparison using Pareto-Smoothed Leave-One-Out Information Criteria")
+
+```
 

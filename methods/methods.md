@@ -62,19 +62,28 @@ false negatives.
 
 ## Experimental Data
 
-We also demonstrate the performance of `artemis` verse traditional
-analyses using real-world data.
-<!-- From help file for datasets -->
-qPCR results of Delta Smelt live car experiment conducted in the
-primary of the CVP.  The second of two experiments completed on
-2017-08-02, part of a series of 6 experiments total completed at the
-CVP with dead Delta Smelt in August-September of 2017.  This
-experiment was identical to the first (`cvp01`).  100 dead Delta Smelt
-were placed in a car and suspended from the primary louvers. From
-distances of 10-50m, 3 replicate filters were taken every 10m at 50mL
-and 200mL, sampled from near to far relative to live car.  Note that
-the live car itself (Distance_m = ~0) was not actually sampled.
-Date: 2017-08-02 StdCrvID: ds-2018-09-27 Tech reps per filter: 3 Total
-filters: 30 Biomass (N): 100 Distance range (m): 10-50 Volume values
-(mL): 50, 200
+We also demonstrate the performance of `artemis` verse standard linear
+ models using real-world data.  
+ <!-- From help file for datasets -->
+ qPCR results of Delta Smelt live car experiment conducted in the
+ primary of the CVP.  The second of two experiments completed on
+ 2017-08-02, part of a series of 6 experiments total completed at the
+ CVP with dead Delta Smelt in August-September of 2017.  This
+ experiment was identical to the first (`cvp01`).  100 dead Delta
+ Smelt were placed in a car and suspended from the primary
+ louvers. From distances of 10-50m, 3 replicate filters were taken
+ every 10m at 50mL and 200mL, sampled from near to far relative to
+ live car.  Note that the live car itself (Distance_m = ~0) was not
+ actually sampled.  Date: 2017-08-02 StdCrvID: ds-2018-09-27 Tech reps
+ per filter: 3 Total filters: 30 Biomass (N): 100 Distance range (m):
+ 10-50 Volume values (mL): 50, 200
 
+To compare the performance of these models, two different methods were
+used. First, the Pareto-Smoothed Leave-one-out Information Criteria
+was calculated for each model using the `loo` package in R
+[@loo]. This metric assesses a model's performance predicting
+out-of-sample data, which gives a measure of how will the model
+performs relative to the risk of overfitting to the data. Next, each
+model was used to predict the expected response values for a 
+second dataset collected in the same system. This gives a real world
+example of prediction error for each model.
