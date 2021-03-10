@@ -1,7 +1,7 @@
 
 INTRO = intro/intro.md intro/eDNA_background.md intro/estimating_eDNA.md intro/modeling_eDNA.md intro/package_desc.md
 METHODS = methods/methods.md
-SECTIONS=abstract.md $(INTRO) $(METHODS) results/results.md discussion/discussion.md conclusion/conclusion.md
+SECTIONS=abstract.md $(INTRO) $(METHODS) results/results.md discussion/discussion.md discussion/future_work.md conclusion/conclusion.md
 TABS_FIGS = analysis/tables.md
 FORMAT=format.yaml
 BIB=artemis.bibtex

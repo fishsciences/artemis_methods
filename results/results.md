@@ -6,7 +6,7 @@ Model diagnostics and inferences from each model
 
 Based on 500 simulated datasets, the standard linear mixed-effects
 models produced biased estimates. The estimates for the four
-generative parameters (Intercept, $\beta_{distance}$, $\beta{volume},
+generative parameters (Intercept, $\beta_{distance}$, $\beta_{volume}$,
 and $\sigma$), were all skewed from the true values used to generate
 the dataset. One effect of this bias was the 95% Credible Intervals
 produced from the standard model did not include the true values in
