@@ -2,7 +2,7 @@
 library(ggplot2)
 library(artemis)
 library(rstanarm)
-options(mc.cores = 12L)
+options(mc.cores = parallel::detectCores()/2) # only use half cores
 # basic simulation of ln[eDNA]
 # Using the generative model in the manuscript
 
@@ -33,6 +33,9 @@ arter_ests = lapply(sim_datasets, fit_and_extract, fun = eDNA_lmer, std_curve_al
 ## arter_ests = do.call(rbind, arter_ests)
 saveRDS(arter_ests, file = "art_sim_results.rds")
  }
+
+
+
 #------------------------------------------------------------------------------#
 
 # Old Stuff

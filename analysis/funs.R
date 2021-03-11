@@ -58,3 +58,17 @@ summary_artemis = function(x, p = c(0.05,0.5,0.95),
 {
     summary(x, probs = p)[,2:4]
 }
+
+
+out_of_sample = function(df1, df2, model, pred_fun, ...)
+{
+    fit = model(...)
+    d = pred_fun(fit, df2)
+
+}
+
+s = x^1500
+
+.3 = x^1500
+
+   
