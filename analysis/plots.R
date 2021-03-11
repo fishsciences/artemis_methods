@@ -3,8 +3,8 @@ library(gridExtra)
 
 source("plot_funs.R")
 # plots
-lmer_ests = readRDS("lmer_sim_results.rds")
-arter_ests = readRDS("art_sim_results.rds")
+lmer_ests = readRDS("output/lmer_sim_results.rds")
+arter_ests = readRDS("output/art_sim_results.rds")
 
 true_vals = c(-12, -4, 0.05, 1.5)
 coef_list_lmer = lapply(1:4, function(i)

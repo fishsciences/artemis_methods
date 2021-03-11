@@ -7,13 +7,13 @@ RSCRIPT = Rscript $<
 
 all: $(FIGS) $(TABS)
 
-$(SIM_RESULTS) &: sim.R
+$(SIM_RESULTS) &: sim.R | output
 	$(RSCRIPT)
 
-$(MODEL_FITS) $(MODEL_LOO) &: analysis.R
+$(MODEL_FITS) $(MODEL_LOO) &: analysis.R | output
 	$(RSCRIPT)
 
-$(FIGS) &: plots.R plot_funs.R $(SIM_RESULTS) $(MODEL_FITS) 
+$(FIGS) &: plots.R plot_funs.R $(SIM_RESULTS) $(MODEL_FITS) | figs
 	$(RSCIPT)
 
 # $(TABS) &: tables.R $(SIM_RESULTS) $(MODEL_FITS) $(MODEL_LOO)
@@ -24,3 +24,8 @@ $(FIGS) &: plots.R plot_funs.R $(SIM_RESULTS) $(MODEL_FITS)
 
 clean:
 	rm -rf output/*
+
+output:
+	mkdir output
+figs:
+	mkdir figs

@@ -67,8 +67,5 @@ out_of_sample = function(df1, df2, model, pred_fun, ...)
 
 }
 
-s = x^1500
-
-.3 = x^1500
 
    
