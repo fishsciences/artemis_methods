@@ -28,10 +28,16 @@ standard curve and hence specifics to a particular lab, the censoring
 point is also lab dependent. 
 
 This censoring process can create several issues for analyzing eDNA
-data. First, not taking this data censoring process into account in
-the analysis can lead to biases in model estimates. Second, potential
+data. The biggest issue is that not taking this data censoring process
+into account in the analysis can lead to biases in model estimates and
+lead to invalid confidence or credible intervals. 
+
+<!-- Not sure if we want to discuss since this was dropped from package
+
+Second, potential
 sources of measurement error in the extraction and qPCR processes are
-difficult to separate and quantify. For example, Cq values produced by
+difficult to separate and quantify.
+For example, Cq values produced by
 qPCR become more variable near the threshold of detection, i.e. as the
 number of eDNA molecules available for amplification approaches
 zero. This source of variability in the response is different from
@@ -39,15 +45,17 @@ that produced by error introduced in the pipetting process during
 extraction, but they have the same effect on Cq (namely, increasing
 variability).  
 
+-->
+
 We addressed these issues by creating the `artemis` package for R. In
 `artemis`, we implement a model which directly estimates the effect of
-the predictors on the latent (unobserved) variable, eDNA
-concentration. This is accomplished by linking eDNA concentration to
-the observed response via the standard curve parameters.  The goal of
-this paper is to introduce this truncated latent variable model in the
-analysis of eDNA data, and to compare its performance to several other
-commonly-used modeling approaches in the field: occupancy modeling for
-deriving the probability of detection, and binomial regression
+the predictors on the latent (unobserved) variable, [eDNA]. This is
+accomplished by linking [eDNA] to the observed response via the
+standard curve parameters.  The goal of this paper is to introduce the
+censored latent variable models in the `artemis` R package, and
+demonstrate how `artemis` can be used in the analysis of eDNA data.
+We compare the performance of `artemis` to several other commonly-used
+modeling approaches in the field: linear and binomial regression
 (beta-binomial, negative binomial, and logistic regression).
 
 

@@ -4,6 +4,7 @@ MODEL_LOO = output/compare_loo.rds
 FIGS = figs/coef_est_compare.png
 TABS = tables.md
 RSCRIPT = Rscript $<
+KNIT = Rscript -e "knitr::knit('$<')"
 
 all: $(FIGS) $(TABS)
 
@@ -16,11 +17,11 @@ $(MODEL_FITS) $(MODEL_LOO) &: analysis.R | output
 $(FIGS) &: plots.R plot_funs.R $(SIM_RESULTS) $(MODEL_FITS) | figs
 	$(RSCIPT)
 
-# $(TABS) &: tables.R $(SIM_RESULTS) $(MODEL_FITS) $(MODEL_LOO)
-	# $(RSCRIPT)
+$(TABS) &: tables.Rmd $(SIM_RESULTS) $(MODEL_FITS) $(MODEL_LOO) | output
+	$(KNIT)
 
-%.md : %.Rmd
-	Rscript -e 'knitr::knit("$<")'
+# %.md : %.Rmd
+	# Rscript -e 'knitr::knit("$<")'
 
 clean:
 	rm -rf output/*

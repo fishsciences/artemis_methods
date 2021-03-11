@@ -1,3 +1,3 @@
 ## Background on eDNA studies
 
-Put info here.
+**GREGG ET AL** - Put info here.
