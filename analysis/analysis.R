@@ -99,3 +99,9 @@ abline(lm(d2$ln_eDNA ~ lmer_ln_eDNA))
 plot(d2$ln_eDNA, art_ln_eDNA)
 abline(0,1, lty = 2)
 abline(lm(d2$ln_eDNA ~ art_ln_eDNA))
+
+#------------------------------------------------------------------------------#
+# compare binomial predictions
+d$presence = as.integer(d$Cq < 40)
+binom_mod = stan_glmer(ln_eDNA  ~ Distance_m + Volume_mL + (1|FilterID),
+                       data = d, family = "gaussian")
