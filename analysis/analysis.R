@@ -99,3 +99,48 @@ abline(lm(d2$ln_eDNA ~ lmer_ln_eDNA))
 plot(d2$ln_eDNA, art_ln_eDNA)
 abline(0,1, lty = 2)
 abline(lm(d2$ln_eDNA ~ art_ln_eDNA))
+
+# Binomial comparison:
+
+d$presence = as.integer(d$Cq < 40)
+
+mod_binom = stan_glmer(presence  ~ Distance_m + Volume_mL + (1|FilterID),
+                       data = d, family = "binomial")
+
+binom_pp = posterior_predict(mod_binom)
+
+# prediction more than 50% cases
+pred_pres = colSums(binom_pp) / nrow(binom_pp) > 0.50
+pred_pres
+
+recall_prec = function(pred, obs)
+    {
+        true_pos = sum(obs & pred)
+        tot_pos = sum(pred)
+        false_neg = sum(obs & !pred)
+
+        return(c(
+            precision_binom = true_pos / tot_pos,
+            recall_binom = true_pos / (true_pos + false_neg)))
+}
+## artemis - lmer predictions
+
+art_pp = predict(mod_arter)
+art_pres = (rowMeans(art_pp$Cq_hat) < 40)
+
+
+## out of sample
+d2$presence = d2$Cq < 40
+pred_oos_binom = posterior_predict(mod_binom, newdata = d2)
+pred_pres_oos = colSums(pred_oos_binom) / nrow(pred_oos_binom) > 0.50
+pred_pres_oos
+
+art_pp_oos = predict(mod_arter, newdata = d2[,c("Distance_m", "Volume_mL")])
+art_pres_oos = (rowMeans(art_pp_oos$Cq_hat) < 40)
+
+binom_comparision = data.frame(
+    binomial_in_sample = recall_prec(pred_pres, d$presence),
+    artemis_in_sample = recall_prec(art_pres, d$presence),
+    binomial_out_sample = recall_prec(pred_pres_oos, d2$presence),
+    artmis_out_sample = recall_prec(art_pres_oos, d2$presence))
+saveRDS(t(binom_comparision), file = "output/binom_compare.rds")

@@ -40,3 +40,13 @@ knitr::kable(m_loo[,c("looic", "p_loo", "elpd_diff", "se_diff")], digits = 1, ca
 
 ```
 
+```{r echo = FALSE, messages = FALSE}
+binom_comp = readRDS("output/binom_compare.rds")
+# not robust
+rownames(binom_comp) = c("binomial: in-sample", "artemis: in-sample",
+                    "binomial: out-of-sample", "binomial: out-of-sample")
+colnames(binom_comp) = c("Precision", "Recall")
+knitr::kable(binom_comp, digits = 2, caption = "Model classification comparison of in-sample (data used to fit the original model) and out-of-sample (data not used to fit the original model) using precision and recall. Precision is the proportion of classifications which were actually correct. A precision of 1.0 indicates no false positive classifications. Recall is the proportion of actual positives correct. A recall of 1.0 indicates no false negatives.")
+
+```
+
