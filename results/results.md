@@ -29,11 +29,12 @@ Pareto-Smoothed Leave-One-Out Information Criteria suggested the
 alternative. Furthermore, when the parameter estimates for each model
 were used to predict data for a second set of experimental data, the
 `artemis` models had lower RMSE on the predictions.
+<!-- figure or table of this? -->
 
 ![Comparison of lmer vs eDNA_lmer to recover parameters from 500 simulated
 datasets. Blue areas are the 95\% Credible Intervals, while black areas
 are the median parameter estimates. The "true value" used in the
-simulation is marked as a dashed line.](analysis/figs/coef_est_compare.png)
+simulation is marked as a dashed line.](./analysis/figs/coef_est_compare.png)
 
 In comparision between `artemis` models and a binomial mixed-effects
 model fit to the same data, the binomial data showed both better

@@ -22,6 +22,21 @@ linear models in R, but using underlying these statistical models which
 account for the data censorship. Additionally, `artemis` includes many
 convienence functions for working with model estimates. 
 
+We demonstrate here that artemis had better performance in multiple
+metrics compared to standard linear models, against both simulated and
+observed data. While we demonstrate here that biased estimates are
+possible when fitting standard linear models to censored data, the
+degree of bias will depend on the exact characteristics of the
+dataset. In general, the more observations which experience
+censorship, the more bias there can be in the estimates.
+
+When the primary concern is presence/absence of a species, we
+demonstrate here that `artemis` models have desirable characteristics
+compared to a standard binomial GLM. Although `artemis`
+under-performed in-sample prediction, it had better performance in
+out-of-sample prediction. This is an indication that the binomial GLM
+was overfit to the in-sample dataset.
+
 In situations where the primary interest is to understand how [eDNA]
 responds to various sampling or environmental factors, `artemis` is a
 drop-in replacement for standard linear models. However, when the
@@ -59,9 +74,7 @@ accuracy for many purposes. Having a simple and quick method to
 generate probability statements allows us to quickly refine sampling
 designs and make decisions. 
 
-
 ----------------
-
 
 Discussion of when and how the truncated latent variable model
 out-performed other modeling approaches for this data Introduction of

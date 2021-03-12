@@ -20,11 +20,8 @@ $(FIGS) &: plots.R plot_funs.R $(SIM_RESULTS) $(MODEL_FITS) | figs
 $(TABS) &: tables.Rmd $(SIM_RESULTS) $(MODEL_FITS) $(MODEL_LOO) | output
 	$(KNIT)
 
-# %.md : %.Rmd
-	# Rscript -e 'knitr::knit("$<")'
-
 clean:
-	rm -rf output/*
+	rm -rf output/* tables.md
 
 output:
 	mkdir output
