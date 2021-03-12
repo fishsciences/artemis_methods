@@ -43,23 +43,6 @@ Note that while `artemis` contains similar functions to simulate data,
 we opted to replicate the data outside of `artemis`'s functions for
 transparancy. 
 
-<!-- Unsure about this --> 
-To broaden the comparisons
-to other models used to analyze eDNA data, we conducted
-cross-validation against the simulated data with a broader set of
-models.  First each model was fit to a subset of the simulated
-data. Then the model fit was used to produce predictions for the
-withheld observations. For models where the response is a binary
-variable (e.g. "detection"), the predictions from continuous models
-were converted into a binary variable for the comparison. For
-continuous models, the mean prediction error was calculated. For
-binary models, the precision (the proportion of positive predictions
-actually correct) and recall (the proportion of actual positives
-predicted correctly) were calculated. A precision of 1 indicates the
-model had no false positives. A recall of 1 indicates the model had no
-false negatives.
-
-
 ## Experimental Data
 
 We also demonstrate the performance of `artemis` verse standard linear
@@ -87,3 +70,28 @@ performs relative to the risk of overfitting to the data. Next, each
 model was used to predict the expected response values for a 
 second dataset collected in the same system. This gives a real world
 example of prediction error for each model.
+
+<!-- Unsure about this - might need clarification --> 
+
+To broaden the comparisons to other models used to analyze eDNA data,
+we compared the classification performance between binomial models.
+First we fit a binomial mixed-effects model to the same dataset as
+above. The response was "presence", a binary variable indicating
+whether the Cq was lower than the detection threshold. The model was
+fit similar to the linear models above using the `rstanarm` R package.
+We then generated a predicted value (presence or absence) for each
+observation in the in-sample dataset (the data used to estimate model
+parameters) and the out-of-sample dataset (data not used to estimate
+parameters). Since the Bayesian model produces many posterior
+predictions, we took a predicted "presence" to be when 50% or more of
+the posterior predictions were presences.  To compare to a model fit
+with `artemis`, predictions were generated for each observation. The
+median predicted Cq value was taken as the predicted value, and then
+predictions were classified as presence/absence according to whether
+the predicted value was below or above the detection threshold.
+Finally, to compare the classification performance for the in-sample
+and out-of-sample predictions, the precision (the proportion of
+positive predictions actually correct) and recall (the proportion of
+actual positives predicted correctly) were calculated. A precision of
+1 indicates the model had no false positives. A recall of 1 indicates
+the model had no false negatives [@googleml].

@@ -34,3 +34,15 @@ were used to predict data for a second set of experimental data, the
 datasets. Blue areas are the 95\% Credible Intervals, while black areas
 are the median parameter estimates. The "true value" used in the
 simulation is marked as a dashed line.](analysis/figs/coef_est_compare.png)
+
+In comparision between `artemis` models and a binomial mixed-effects
+model fit to the same data, the binomial data showed both better
+precision and recall for the in-sample data, compared to the `artemis`
+model (0.92 vs. 0.72 precision; 0.94 vs. 0.88 recall). However, when
+used to classify out-of-sample data, the binomial model's performance
+showed similar results to the `artemis` predictions in precision (0.57
+vs 0.56 precision), but worse recall (0.69 vs 0.77 recall). This
+suggests that the binomial data was overfit to the original
+data. Futhermore, the binomial model would produce more false
+negatives compared to the `artemis` classification predicting the same
+data.
