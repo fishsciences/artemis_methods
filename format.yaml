@@ -1,8 +1,13 @@
 ---
 title: "The artemis package for eDNA analysis in R"
 author:
-- Matthew B. Espe
 - Myfanwy Johnston
+- Matthew B. Espe
+- Gregg Schumer
+- Scott Blankenship
+- Cheryl Dean
+- Mark Bowen
+- Matt Brennan
 geometry: margin=1in
 bibliography: artemis.bibtex
 ---
