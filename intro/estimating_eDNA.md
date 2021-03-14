@@ -27,10 +27,10 @@ occuring. Crucially, because the Cq values are dependent on the
 standard curve and hence specifics to a particular lab, the censoring
 point is also lab dependent. 
 
-This censoring process can create several issues for analyzing eDNA
-data. The biggest issue is that not taking this data censoring process
-into account in the analysis can lead to biases in model estimates and
-lead to invalid confidence or credible intervals. 
+This censoring process can create several issues <!-- we mention "several" issues but then only discuss one, then say we addressed "issues" in the next para; are there others we can mention here? measurement error? Or just reiterating the unobserved variable of [eDNA] --> for analyzing eDNA
+data. The most concerning issue is that not taking this data censoring process
+into account in the analysis can lead to biases in model estimates, and in turn to
+invalid confidence or credible intervals. 
 
 <!-- Not sure if we want to discuss since this was dropped from package
 
@@ -55,7 +55,7 @@ standard curve parameters.  The goal of this paper is to introduce the
 censored latent variable models in the `artemis` R package, and
 demonstrate how `artemis` can be used in the analysis of eDNA data.
 We compare the performance of `artemis` to several other commonly-used
-modeling approaches in the field: linear and binomial regression
+modeling approaches in eDNA research: linear and binomial regression
 (beta-binomial, negative binomial, and logistic regression).
 
 

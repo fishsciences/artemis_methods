@@ -1,14 +1,14 @@
 ## Overview of `artemis` Functionality
 
 The functions included in `artemis` can be grouped into a few
-categories; 
+categories:
 
   1. Modeling 
   2. Simulation
   3. Post-hoc analyses
   4. Utilities
 
-
+<!-- @Von might break these into sections with subheadings at some pt, for visual organization/ clarity-->
 First, the modeling functions are intended to be drop-in replacements
 for `lm()` or `glm()` [@R] while utilizing the generative model as outlined
 previously. An example call to the modeling function `eDNA_lm()` is,
@@ -35,7 +35,8 @@ Internally, the conversion between Cq and [eDNA] is conducted using
 standard curve coefficients provided by the user. Importantly, these
 can be specified as a vector of $\alpha_{std\_curve}$ and
 $\beta_{std\_curve}$ values. This allows the use of multiple standard
-curves within the same model. Thus, data from different studies can
+curves within the same model. Thus, data from different studies or 
+which use multiple standard curves can
 easily be analyzed together.
 
 For mixed-effects models, the modeling function `eDNA_lmer()` can be
@@ -48,8 +49,8 @@ specifies the random effects in the model with,
 ```
 
 Both model types are fit using a Bayesian model fit via the Stan MCMC
-program [@stan]. Additional parameters can be passed to control the MCMC via
-the `...` arguments in either modeling function.
+program [@stan]. In both `artemis` modeling functions, additional parameters can be passed to control the MCMC via
+the "`...`" arguments.
 
 Next, the simulation functions `sim_eDNA_lm()` and
 `sim_eDNA_lmer()` allow researchers to see the implications of
