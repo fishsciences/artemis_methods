@@ -27,7 +27,15 @@ occuring. Crucially, because the Cq values are dependent on the
 standard curve and hence specifics to a particular lab, the censoring
 point is also lab dependent. 
 
-This censoring process can create several issues <!-- we mention "several" issues but then only discuss one, then say we addressed "issues" in the next para; are there others we can mention here? measurement error? Or just reiterating the unobserved variable of [eDNA] --> for analyzing eDNA
+This censoring process can create several issues 
+<!-- 
+we mention "several" issues but then only discuss one, then say we 
+addressed "issues" in the next para; are there others we can 
+mention here? measurement error? Or just reiterating the 
+unobserved variable of [eDNA] 
+--> 
+
+for analyzing eDNA
 data. The most concerning issue is that not taking this data censoring process
 into account in the analysis can lead to biases in model estimates, and in turn to
 invalid confidence or credible intervals. 
@@ -43,7 +51,7 @@ number of eDNA molecules available for amplification approaches
 zero. This source of variability in the response is different from
 that produced by error introduced in the pipetting process during
 extraction, but they have the same effect on Cq (namely, increasing
-variability).  
+variability).
 
 -->
 
