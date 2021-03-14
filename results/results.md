@@ -21,13 +21,15 @@ the expected range.
 ## Experimental data
 
 When fit to the same experimental data, `artemis` models demonstrated
-favorable characteristics compared to alternative models. While the differences in parameter estimates were
-relatively small, the predictive performance as measured by the
-Pareto-Smoothed Leave-One-Out Information Criteria suggested the
-`artemis` models fit the data <!--better?--> compared to widely-used
+favorable characteristics compared to alternative models. While the
+differences in parameter estimates were relatively small, the
+predictive performance as measured by the Pareto-Smoothed
+Leave-One-Out Information Criteria suggested the `artemis` models fit
+the data <!--better?--> compared to widely-used
 alternatives. Furthermore, when the parameter estimates for each model
 were used to predict data for a second set of experimental data, the
-`artemis` models had lower RMSE <!--@Matt what is RSME--> on the predictions.
+`artemis` models had lower RMSE <!--@Matt what is RSME--> on the
+predictions.
 
 ![Comparison of lmer vs eDNA_lmer to recover parameters from 500 simulated
 datasets. Blue areas are the 95\% Credible Intervals, while black areas

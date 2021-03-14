@@ -8,7 +8,11 @@ categories:
   3. Post-hoc analyses
   4. Utilities
 
-<!-- @Von might break these into sections with subheadings at some pt, for visual organization/ clarity-->
+<!-- 
+@Von might break these into sections with subheadings at some pt,
+for visual organization/ clarity
+-->
+
 First, the modeling functions are intended to be drop-in replacements
 for `lm()` or `glm()` [@R] while utilizing the generative model as outlined
 previously. An example call to the modeling function `eDNA_lm()` is,
@@ -49,8 +53,9 @@ specifies the random effects in the model with,
 ```
 
 Both model types are fit using a Bayesian model fit via the Stan MCMC
-program [@stan]. In both `artemis` modeling functions, additional parameters can be passed to control the MCMC via
-the "`...`" arguments.
+program [@stan]. In both `artemis` modeling functions, additional
+parameters can be passed to control the MCMC via the "`...`"
+arguments.
 
 Next, the simulation functions `sim_eDNA_lm()` and
 `sim_eDNA_lmer()` allow researchers to see the implications of
