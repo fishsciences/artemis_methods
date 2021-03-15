@@ -17,7 +17,7 @@ test.md: $(SECTIONS) $(FORMAT) $(TABS_FIGS) $(BIB)
 
 all: $(MANUSCRIPT)
 
-$(TABS_FIGS) &: 
+$(TABS_FIGS) &: analysis/tables.Rmd
 	$(MAKE) -C analysis
 
 clean:

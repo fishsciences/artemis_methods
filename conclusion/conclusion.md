@@ -8,3 +8,4 @@ accuracy for censored eDNA data, compared to standard linear models.
 Additionally, `artemis` includes many functions to support a full eDNA
 workflow. 
 
+\newpage

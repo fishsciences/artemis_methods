@@ -88,5 +88,7 @@ sim_eDNA_lmer(Cq ~ distance + volume + (1|rep) + (1|tech_rep),
 
 The `artemis` package also includes methods for R's `plot()`,
 `summary()`, `data.frame()`, and `predict()` functions for the
-`eDNA_model` and `eDNA_simulation` classes.
+`eDNA_model` and `eDNA_simulation` classes. For further information,
+please refer to the package vignettes and tutorials at
+[https://fishsciences.github.io/artemis/](https://fishsciences.github.io/artemis/index.html).
 

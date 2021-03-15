@@ -50,4 +50,3 @@ knitr::kable(binom_comp, digits = 2, caption = "Model classification comparison 
 ```
 
 \newpage
-

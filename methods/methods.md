@@ -1,5 +1,5 @@
 # Methods
-
+<!--
 *Most of these are in the introduction.* 
 Explanation and presentation of model structure
 Presentation of alternative models
@@ -13,7 +13,7 @@ Diagnostics
 Inferences
 Probability of detection
 Effect sizes
-
+-->
 ## Simulation 
 
 To demonstrate the strength and utility of the `artemis` package for
