@@ -1,18 +1,16 @@
 ## Estimating [eDNA] via qPCR
 
 In eDNA samples, the amount of eDNA present in the sample is estimated
-from the number of quantification cycles of qPCR (hereafter referred
-to as the “Cq” value) completed before amplification takes place
-during qPCR. In eDNA samples that are extracted and run through qPCR
-analysis, the concentration of eDNA is not directly measured. The
-relationship between eDNA concentration ([eDNA]) and Cq values is
-determined via a standard curve generated in the lab for the target
-species. This standard curve formula typically takes the form:
+from the number of quantification cycles of qPCR (hereafter the “Cq”
+value) completed before amplification takes place during qPCR. In eDNA
+samples that are extracted and run through qPCR analysis, the
+concentration of eDNA is not directly measured. The relationship
+between eDNA concentration ([eDNA]) and Cq values is determined via a
+standard curve generated in the lab for the target species.  The
+standard curve is specific to the lab reagents and techniques
+used. This standard curve formula typically takes the form:
 
 $$ Cq = \beta * log([eDNA]) + \alpha $$
-
-The standard curve is specific to the lab reagents and techniques
-used. 
 
 A higher Cq value, i.e. more quantification cycles, corresponds to a
 lower concentration of eDNA in a sample. Above a pre-determined
@@ -27,7 +25,7 @@ occuring. Crucially, because the Cq values are dependent on the
 standard curve and hence specifics to a particular lab, the censoring
 point is also lab dependent. 
 
-This censoring process can create several issues 
+
 <!-- 
 we mention "several" issues but then only discuss one, then say we 
 addressed "issues" in the next para; are there others we can 
@@ -35,7 +33,7 @@ mention here? measurement error? Or just reiterating the
 unobserved variable of [eDNA] 
 --> 
 
-for analyzing eDNA
+This censoring process can create several issues for analyzing eDNA
 data. The most concerning issue is that not taking this data censoring process
 into account in the analysis can lead to biases in model estimates, and in turn to
 invalid confidence or credible intervals. 
@@ -56,14 +54,12 @@ variability).
 -->
 
 We addressed these issues by creating the `artemis` package for R. In
-`artemis`, we implement a model which directly estimates the effect of
+`artemis`, we implement a set of models which directly estimates the effect of
 the predictors on the latent (unobserved) variable, [eDNA]. This is
 accomplished by linking [eDNA] to the observed response via the
 standard curve parameters.  The goal of this paper is to introduce the
-censored latent variable models in the `artemis` R package, and
+censored latent variable models in the `artemis` R package and
 demonstrate how `artemis` can be used in the analysis of eDNA data.
 We compare the performance of `artemis` to several other commonly-used
-modeling approaches in eDNA research: linear and binomial regression
-(beta-binomial, negative binomial, and logistic regression).
-
+modeling approaches in eDNA research.
 

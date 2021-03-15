@@ -9,5 +9,6 @@ author:
 - Mark Bowen
 - Matt Brennan
 geometry: margin=1in
+numbersections: true
 bibliography: artemis.bibtex
 ---
