@@ -59,8 +59,7 @@ transparency. We also demonstrate the performance of `artemis` versus standard l
  actually sampled. Each filter was extracted and analyzed three times with qPCR (three technical replications). The qPCR data from these experiments is plotted in Figure X.
 
 
-To compare the performance of these models, two different methods were
-used. First, the Pareto-Smoothed Leave-one-out Information Criteria
+Two different methods were used in the comparison of model performance. First, the Pareto-Smoothed Leave-one-out Information Criteria
 was calculated for each model using the `loo` package in R
 [@loo]. This metric assesses a model's performance predicting
 out-of-sample data, which gives a measure of how will the model
@@ -71,11 +70,11 @@ example of prediction error for each model.
 
 <!-- Unsure about this - might need clarification --> 
 
-To broaden the comparisons to other models used to analyze eDNA data,
+To broaden the comparisons to other models commonly used to analyze eDNA data,
 we compared the classification performance between binomial models.
-First we fit a binomial mixed-effects model to the same dataset as
+First we fit a binomial mixed-effects model to the same experimental dataset as
 above. The response was "presence", a binary variable indicating
-whether the Cq was lower than the detection threshold. The model was
+whether the Cq was lower than the detection threshold according to its standard curve. The model was
 fit similar to the linear models above using the `rstanarm` R package.
 We then generated a predicted value (presence or absence) for each
 observation in the in-sample dataset (the data used to estimate model
