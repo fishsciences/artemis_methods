@@ -41,25 +41,23 @@ code can be found at
 [https://github.com/fishsciences/artemis_methods](https://github.com/fishsciences/artemis_methods).
 Note that while `artemis` contains similar functions to simulate data,
 we opted to replicate the data outside of `artemis`'s functions for
-transparancy. 
+transparency. We also demonstrate the performance of `artemis` versus standard linear
+ models using real-world data.
 
 ## Experimental Data
 
-We also demonstrate the performance of `artemis` verse standard linear
- models using real-world data.  
  <!-- From help file for datasets -->
- qPCR results of Delta Smelt live car experiment conducted in the
- primary of the CVP.  The second of two experiments completed on
+ The data used were the qPCR results of two Delta Smelt live car experiments conducted in the
+ primary channel of the Central Valley Project.  The experiments were completed on
  2017-08-02, part of a series of 6 experiments total completed at the
- CVP with dead Delta Smelt in August-September of 2017.  This
- experiment was identical to the first (`cvp01`).  100 dead Delta
+ CVP with dead Delta Smelt in August-September of 2017.  The two
+ experiments were identical in design and execution.  100 dead Delta
  Smelt were placed in a car and suspended from the primary
  louvers. From distances of 10-50m, 3 replicate filters were taken
  every 10m at 50mL and 200mL, sampled from near to far relative to
- live car.  Note that the live car itself (Distance_m = ~0) was not
- actually sampled.  Date: 2017-08-02 StdCrvID: ds-2018-09-27 Tech reps
- per filter: 3 Total filters: 30 Biomass (N): 100 Distance range (m):
- 10-50 Volume values (mL): 50, 200
+ the car.  Note that the car itself (Distance_m = ~0) was not
+ actually sampled. Each filter was extracted and analyzed three times with qPCR (three technical replications). The qPCR data from these experiments is plotted in Figure X.
+
 
 To compare the performance of these models, two different methods were
 used. First, the Pareto-Smoothed Leave-one-out Information Criteria
