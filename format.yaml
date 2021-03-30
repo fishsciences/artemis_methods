@@ -1,13 +1,25 @@
 ---
 title: "The artemis package for eDNA analysis in R"
 author:
-- Myfanwy Johnston
-- Matthew B. Espe
-- Gregg Schumer
-- Scott Blankenship
-- Cheryl Dean
-- Mark Bowen
-- Matt Brennan
+  - Myfanwy Johnston:
+      institute: cfs
+  - Matthew B. Espe:
+      institute: one_straw
+  - Gregg Schumer:
+      institute: genidaqs
+  - Scott Blankenship:
+      institute: genidaqs
+  - Cheryl Dean:
+      institute: genidaqs
+  - Mark Bowen:
+      institute: empty
+  - Matt Brennan:
+      institute: cfs
+institute:
+  - cfs: 'Cramer Fish Sciences'
+  - genidaqs: Genidaqs
+  - one_straw: 'One Straw Consulting, LLC'
+  - empty: '??' 
 geometry: margin=1in
 numbersections: true
 bibliography: artemis.bibtex
