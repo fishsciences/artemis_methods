@@ -1,7 +1,5 @@
 # Introduction
 
-<!-- Background info about eDNA studies generally -->
-
 Environmental DNA (eDNA) surveys provide an indirect yet noninvasive
 [@sigsgaard_monitoring_2015], unharmful, sensitive
 [@fernandez_nonindigenous_2019; @pilliod_estimating_2013], inexpensive

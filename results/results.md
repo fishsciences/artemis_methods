@@ -1,7 +1,5 @@
 # Results
 
-Model diagnostics and inferences from each model 
-
 ## Simulated data
 
 Based on 500 simulated datasets, the standard linear mixed-effects
@@ -28,13 +26,15 @@ Leave-One-Out Information Criteria suggested the `artemis` models fit
 the data <!--better?--> compared to widely-used
 alternatives. Furthermore, when the parameter estimates for each model
 were used to predict data for a second set of experimental data, the
-`artemis` models had lower RMSE <!--@Matt what is RSME--> on the
+`artemis` models had lower Root Mean Square Error (RMSE) on the
 predictions.
 
 ![Comparison of lmer vs eDNA_lmer to recover parameters from 500 simulated
 datasets. Blue areas are the 95\% Credible Intervals, while black areas
 are the median parameter estimates. The "true value" used in the
-simulation is marked as a dashed line.](analysis/figs/coef_est_compare.png) <!-- this figure did not show up in @Von's pdf-->
+simulation is marked as a dashed
+line.](analysis/figs/coef_est_compare.png) 
+<!-- this figure did not show up in @Von's pdf-->
 
 In a comparison between `artemis` models and a binomial mixed-effects
 model fit to the same data, the binomial data showed both better
