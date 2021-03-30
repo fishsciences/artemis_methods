@@ -1,7 +1,6 @@
 # Introduction
 
-
 <!-- Background info about eDNA studies generally -->
 
-
+Environmental DNA (eDNA) surveys provide an indirect yet noninvasive (Sigsgaard et al. 2015), unharmful, sensitive (Fernández et al., 2019, Pilliod et al., 2013), inexpensive (Akre et al., 2019), and rapid way to detect rare, cryptic, or invasive organisms in water (Fukumoto et al. 2015, Goldberg et al., 2013). Given these strengths, sampling for and detecting eDNA using quantitative Polymerase Chain Reaction (qPCR) has gained popularity over the past 20 years (Dejean et al. 2012, Moyer et al. 2014) and is now broadly used to sample and indirectly infer presence of taxa in a variety of aquatic, marine, and estuary environments. However, widespread sampling and detection of eDNA by ecologists and conservation biologists is unstandardized, and the field is in need of standards for analysis and reporting (Fediajevaite et al. 2021). In this paper, we introduce a custom latent-variable model designed for the analysis of quantitative PCR data from eDNA studies. We present its advantages over the models that are more frequently employed for analyzing qPCR data, and discuss its potential for assisting in the movement toward standardization of analysis methods employed in eDNA studies that use qPCR.
 

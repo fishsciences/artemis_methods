@@ -41,31 +41,25 @@ code can be found at
 [`https://github.com/fishsciences/artemis_methods`](https://github.com/fishsciences/artemis_methods).
 Note that while `artemis` contains similar functions to simulate data,
 we opted to replicate the data outside of `artemis`'s functions for
-transparancy. 
+transparency. We also demonstrate the performance of `artemis` versus standard linear
+ models using real-world data.
 
 ## Experimental Data
 
-We also demonstrate the performance of `artemis` verse standard linear
- models using real-world data.  
  <!-- From help file for datasets -->
- qPCR results of Delta Smelt live car experiment conducted in the
- primary of the CVP.  The second of two experiments completed on
+ The data used were the qPCR results of two Delta Smelt live car experiments conducted in the
+ primary channel of the Central Valley Project.  The experiments were completed on
  2017-08-02, part of a series of 6 experiments total completed at the
- CVP with dead Delta Smelt in August-September of 2017.  This
- experiment was identical to the first (`cvp01`).  100 dead Delta
+ CVP with dead Delta Smelt in August-September of 2017.  The two
+ experiments were identical in design and execution.  100 dead Delta
  Smelt were placed in a car and suspended from the primary
  louvers. From distances of 10-50m, 3 replicate filters were taken
  every 10m at 50mL and 200mL, sampled from near to far relative to
- live car.  Note that the live car itself (Distance_m = ~0) was not
- actually sampled.  
- 
- **Make this a table?**
- Date: 2017-08-02 StdCrvID: ds-2018-09-27 Tech reps
- per filter: 3 Total filters: 30 Biomass (N): 100 Distance range (m):
- 10-50 Volume values (mL): 50, 200
+ the car.  Note that the car itself (Distance_m = ~0) was not
+ actually sampled. Each filter was extracted and analyzed three times with qPCR (three technical replications). The qPCR data from these experiments is plotted in Figure X.
 
-To compare the performance of these models, two different methods were
-used. First, the Pareto-Smoothed Leave-one-out Information Criteria
+
+Two different methods were used in the comparison of model performance. First, the Pareto-Smoothed Leave-one-out Information Criteria
 was calculated for each model using the `loo` package in R
 [@loo]. This metric assesses a model's performance predicting
 out-of-sample data, which gives a measure of how will the model
@@ -76,11 +70,11 @@ example of prediction error for each model.
 
 <!-- Unsure about this - might need clarification --> 
 
-To broaden the comparisons to other models used to analyze eDNA data,
+To broaden the comparisons to other models commonly used to analyze eDNA data,
 we compared the classification performance between binomial models.
-First we fit a binomial mixed-effects model to the same dataset as
+First we fit a binomial mixed-effects model to the same experimental dataset as
 above. The response was "presence", a binary variable indicating
-whether the Cq was lower than the detection threshold. The model was
+whether the Cq was lower than the detection threshold according to its standard curve. The model was
 fit similar to the linear models above using the `rstanarm` R package.
 We then generated a predicted value (presence or absence) for each
 observation in the in-sample dataset (the data used to estimate model
