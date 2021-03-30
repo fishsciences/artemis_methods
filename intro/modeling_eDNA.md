@@ -4,15 +4,16 @@
 
 qPCR data from eDNA studies are often modeled via a binary response
 model, e.g. occupancy models [@schmidt_site_2013] or some form of
-binomial regression ([@moyer_assessing_2014]; [@song_making_2017]; [@hinlo_environmental_2017]. In these, the response is a binary variable signifying the
-presence/absence of eDNA in the sample. More accurately, this binary
-variable indicates whether a sample had a Cq value below the detection
-threshold. Presence is assumed when a sample has at least one value
-below this threshold, though studies vary on what defines the unit of
-study, e.g. a single detection in a technical replicate, filter,
-sampling point, or occurrence. Regardless, by using off-the-shelf
-analysis programs, these analysis methods allow for easy estimation of
-various covariates on the probability of presence,
+binomial regression [@moyer_assessing_2014; @song_making_2017;
+@hinlo_environmental_2017]. In these, the response is a binary
+variable signifying the presence/absence of eDNA in the sample. More
+accurately, this binary variable indicates whether a sample had a Cq
+value below the detection threshold. Presence is assumed when a sample
+has at least one value below this threshold, though studies vary on
+what defines the unit of study, e.g. a single detection in a technical
+replicate, filter, sampling point, or occurrence. Regardless, by using
+off-the-shelf analysis programs, these analysis methods allow for easy
+estimation of various covariates on the probability of presence,
 
 Using a binary response for eDNA studies has the advantage of ease of
 analysis, as many off-the-shelf statistical programs can estimate a
