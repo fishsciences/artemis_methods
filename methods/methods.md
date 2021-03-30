@@ -18,8 +18,8 @@ Effect sizes
 
 To demonstrate the strength and utility of the `artemis` package for
 modeling eDNA data, we compare `artemis` models to standard
-mixed-effects analysis.  We simulated one hundred datasets using the
-generative process outlined previously [Modeling eDNA](#mod_str).  Then, we used two
+mixed-effects analysis.  We simulated five hundred datasets using the
+generative process outlined previously in [Section 1.4](#mod_str).  Then, we used two
 different eDNA modeling approaches, a linear mixed-effects model and
 `artemis`'s censored-data mixed-effects model to attempt to estimate
 the original parameters used to simulated the data. 
@@ -30,7 +30,7 @@ make the results more directly comparible, the mixed-effects model was
 fit using the `rstanarm` R package(v2.21.1, @rstanarm), a Bayesian modeling package. The
 `rstanarm` and `artemis` packages both use the Stan probabilistic
 programming language to estimate parameters [@stan]. Furthermore, many of the
-defaults in `artemis` functions mirror those in `rstanarm` , which in
+defaults in `artemis` functions mirror those in `rstanarm`, which in
 turn mirror those of the `(g)lm` [@R] and `(g)lmer` [@lme4] functions. For the
 purposes of this demonstration, we simulated an experiment with two
 different filtered volumes, 50 and 100mL, and ten different distances
@@ -38,7 +38,7 @@ from eDNA emission source spread equidistant from 0 to 1000
 m. Additionally, we simulated three filters per measurement and three
 technical replicates per filter. All simulation was done in R, and the
 code can be found at
-[https://github.com/fishsciences/artemis_methods](https://github.com/fishsciences/artemis_methods).
+[`https://github.com/fishsciences/artemis_methods`](https://github.com/fishsciences/artemis_methods).
 Note that while `artemis` contains similar functions to simulate data,
 we opted to replicate the data outside of `artemis`'s functions for
 transparancy. 
@@ -57,7 +57,10 @@ We also demonstrate the performance of `artemis` verse standard linear
  louvers. From distances of 10-50m, 3 replicate filters were taken
  every 10m at 50mL and 200mL, sampled from near to far relative to
  live car.  Note that the live car itself (Distance_m = ~0) was not
- actually sampled.  Date: 2017-08-02 StdCrvID: ds-2018-09-27 Tech reps
+ actually sampled.  
+ 
+ **Make this a table?**
+ Date: 2017-08-02 StdCrvID: ds-2018-09-27 Tech reps
  per filter: 3 Total filters: 30 Biomass (N): 100 Distance range (m):
  10-50 Volume values (mL): 50, 200
 
