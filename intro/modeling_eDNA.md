@@ -109,7 +109,7 @@ measurement error,
 $$ log[eDNA]_i \sim Trunc. Normal(\hat{log[eDNA]_i}, \sigma_{Cq}, U) $$
 
 Where the observed $log[eDNA]_i$ values are censored at the
-predetermined threshold, $U$. This threshold is backtransformed from
+predetermined threshold, $U$. This threshold is back-transformed from
 the threshold on Cq. Importantly, the $\hat{log[eDNA]}$ values in
 the model are not censored, allowing the latent variable to reflect the "true"
 [eDNA] beyond the censorship point. The likelihood that a sampled $log[eDNA]$
