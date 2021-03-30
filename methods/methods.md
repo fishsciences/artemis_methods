@@ -46,39 +46,44 @@ transparency. We also demonstrate the performance of `artemis` versus standard l
 
 ## Experimental Data
 
- <!-- From help file for datasets -->
- The data used were the qPCR results of two Delta Smelt live car experiments conducted in the
- primary channel of the Central Valley Project.  The experiments were completed on
- 2017-08-02, part of a series of 6 experiments total completed at the
- CVP with dead Delta Smelt in August-September of 2017.  The two
- experiments were identical in design and execution.  100 dead Delta
- Smelt were placed in a car and suspended from the primary
- louvers. From distances of 10-50m, 3 replicate filters were taken
- every 10m at 50mL and 200mL, sampled from near to far relative to
- the car.  Note that the car itself (Distance_m = ~0) was not
- actually sampled. Each filter was extracted and analyzed three times with qPCR (three technical replications). The qPCR data from these experiments is plotted in Figure X.
+ <!-- From help file for datasets --> 
+ The data used were the qPCR
+ results of two Delta Smelt live car experiments conducted in the
+ primary channel of the Central Valley Project.  The experiments were
+ completed on 2017-08-02, part of a series of 6 experiments total
+ completed at the CVP with dead Delta Smelt in August-September
+ of 2017.  The two experiments were identical in design and execution.
+ 100 dead Delta Smelt were placed in a car and suspended from the
+ primary louvers. From distances of 10-50m, 3 replicate filters were
+ taken every 10m at 50mL and 200mL, sampled from near to far relative
+ to the car.  Note that the car itself (Distance_m = ~0) was not
+ actually sampled. Each filter was extracted and analyzed three times
+ with qPCR (three technical replications). The qPCR data from these
+ experiments is plotted in Figure X.
 
 
-Two different methods were used in the comparison of model performance. First, the Pareto-Smoothed Leave-one-out Information Criteria
-was calculated for each model using the `loo` package in R
+Two different methods were used in the comparison of model
+performance. First, the Pareto-Smoothed Leave-one-out Information
+Criteria was calculated for each model using the `loo` package in R
 [@loo]. This metric assesses a model's performance predicting
 out-of-sample data, which gives a measure of how will the model
 performs relative to the risk of overfitting to the data. Next, each
-model was used to predict the expected response values for a 
-second dataset collected in the same system. This gives a real world
-example of prediction error for each model.
+model was used to predict the expected response values for a second
+dataset collected in the same system. This gives a real world example
+of prediction error for each model.
 
 <!-- Unsure about this - might need clarification --> 
 
-To broaden the comparisons to other models commonly used to analyze eDNA data,
-we compared the classification performance between binomial models.
-First we fit a binomial mixed-effects model to the same experimental dataset as
-above. The response was "presence", a binary variable indicating
-whether the Cq was lower than the detection threshold according to its standard curve. The model was
-fit similar to the linear models above using the `rstanarm` R package.
-We then generated a predicted value (presence or absence) for each
-observation in the in-sample dataset (the data used to estimate model
-parameters) and the out-of-sample dataset (data not used to estimate
+To broaden the comparisons to other models commonly used to analyze
+eDNA data, we compared the classification performance between binomial
+models.  First we fit a binomial mixed-effects model to the same
+experimental dataset as above. The response was "presence", a binary
+variable indicating whether the Cq was lower than the detection
+threshold according to its standard curve. The model was fit similar
+to the linear models above using the `rstanarm` R package.  We then
+generated a predicted value (presence or absence) for each observation
+in the in-sample dataset (the data used to estimate model parameters)
+and the out-of-sample dataset (data not used to estimate
 parameters). Since the Bayesian model produces many posterior
 predictions, we took a predicted "presence" to be when 50% or more of
 the posterior predictions were presences.  To compare to a model fit
