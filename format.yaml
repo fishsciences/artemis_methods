@@ -1,8 +1,10 @@
 ---
-title: "The artemis package for eDNA analysis in R"
+title: "The `artemis` package for eDNA analysis in R"
 author:
   - Myfanwy Johnston:
       institute: cfs
+	  correspondence: "yes"
+	  email: myfanwy.johnston@fishsciences.net
   - Matthew B. Espe:
       institute: one_straw
   - Gregg Schumer:
@@ -17,9 +19,9 @@ author:
       institute: cfs
 institute:
   - cfs: 'Cramer Fish Sciences'
-  - genidaqs: Genidaqs
   - one_straw: 'One Straw Consulting, LLC'
-  - empty: '??' 
+  - genidaqs: Genidaqs
+  - empty: '??'
 geometry: margin=1in
 numbersections: true
 bibliography: artemis.bibtex

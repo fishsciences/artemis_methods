@@ -1,4 +1,5 @@
 PANDOC = /usr/bin/pandoc
+LUA_FILTERS = $(HOME)/lua-filters/filters
 INTRO = intro/intro.md intro/estimating_eDNA.md intro/modeling_eDNA.md intro/package_desc.md
 METHODS = methods/methods.md
 DISCUSSION = discussion/discussion.md discussion/future_work.md
@@ -13,7 +14,10 @@ DOC=artemis_methods.docx
 MD=artemis_methods.md
 
 $(MANUSCRIPT): $(SECTIONS) $(FORMAT) $(FIGS) $(BIB)
-	$(PANDOC) --citeproc --verbose -s -o $@ $(SECTIONS) $(FORMAT)
+	$(PANDOC) --citeproc \
+		--lua-filter=$(LUA_FILTERS)/scholarly-metadata.lua \
+        --lua-filter=$(LUA_FILTERS)/author-info-blocks.lua \
+        --verbose -s -o $@ $(SECTIONS) $(FORMAT)
 
 $(DOC): $(SECTIONS) $(FORMAT) $(FIGS) $(BIB)
 	$(PANDOC) --citeproc --verbose -s -o $@ $(SECTIONS) $(FORMAT)
