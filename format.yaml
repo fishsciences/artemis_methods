@@ -22,6 +22,7 @@ institute:
   - one_straw: 'One Straw Consulting, LLC'
   - genidaqs: Genidaqs
   - empty: '??'
+keywords: [Environmental DNA, qPCR, R, statistical modeling]
 geometry: margin=1in
 numbersections: true
 bibliography: artemis.bibtex
