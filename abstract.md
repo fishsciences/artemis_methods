@@ -9,9 +9,10 @@ measurement error common.  The performance of `artemis` models is
 compared to commonly used regression approaches using both simulated
 and experimental data. We demonstrate `artemis` models have several
 favorable charactoristics compared to standard regression approaches,
-while offering similar ease of use. Lastly, we discuss possible
-trade-offs and considerations for choosing the most appropriate
-analysis platform for eDNA survey data.
+with more accurate estimates, less bias, and better prediction
+performance while offering similar ease of use. Lastly, we discuss
+possible trade-offs and considerations for choosing the most
+appropriate analysis platform for eDNA survey data.
 
 <!-- Help! Needs work! -->
 
