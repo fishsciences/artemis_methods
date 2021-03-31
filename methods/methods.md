@@ -22,7 +22,7 @@ mixed-effects analysis.  We simulated five hundred datasets using the
 generative process outlined previously in [Section 1.4](#mod_str).  Then, we used two
 different eDNA modeling approaches, a linear mixed-effects model and
 `artemis`'s censored-data mixed-effects model to attempt to estimate
-the original parameters used to simulated the data. 
+the original parameters used to simulate the data. 
 
 For this task, only models which directly estimate effects on the
 latent or back-transformed ln[eDNA] values were compared. To further
@@ -51,15 +51,15 @@ The data used were the combined qPCR results from two Delta Smelt live car
 experiments conducted in the primary channel of the Central Valley
 Project (CVP) in the Sacramento - San Joaquin River Delta, California,
 USA.  The experiments were completed on 2017-08-02, part of a
-series of 6 experiments total completed at the CVP with dead Delta
+series of 6 experiments total completed at the CVP with cultured, euthenized Delta
 Smelt in August-September of 2017.  The two experiments were identical
-in design and execution.  100 dead Delta Smelt were placed in a car
-and suspended from the primary louvers. From distances of 10-50m, 3
+in design and execution.  100 euthenized Delta Smelt were placed in a car
+and suspended from the primary louvers. From distances of 10-50m, three
 replicate filters were taken every 10m at 50mL and 200mL, sampled from
 near to far relative to the car.  Note that the car itself (Distance_m
 = ~0) was not actually sampled. Each filter was extracted and analyzed
 three times with qPCR (three technical replications). The qPCR data
-from these experiments is plotted in Figure X. To model these data, we
+from these experiments is plotted in Figure X. All sampling and extraction procedures followed those described in Schumer et al. 2019 [@schumer_utilizing_2019]. To model these data, we
 assume a fixed effect of distance (m) and volume sampled (mL). For
 mixed-effects models, we assume a random intercept term for each
 unique filter (FilterID). 

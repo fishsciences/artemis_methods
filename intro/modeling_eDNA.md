@@ -13,29 +13,27 @@ has at least one value below this threshold, though studies vary on
 what defines the unit of study, e.g. a single detection in a technical
 replicate, filter, sampling point, or occurrence. Regardless, by using
 off-the-shelf analysis programs, these analysis methods allow for easy
-estimation of various covariates on the probability of presence,
+estimation of various covariates on the probability of presence.
 
 Using a binary response for eDNA studies has the advantage of ease of
 analysis, as many off-the-shelf statistical programs can estimate a
 binomial model. However, there is a trade-off with this; the ease of
-analysis within a study verses difficulty in comparing between
+analysis within a study versus the difficulty in comparing between
 studies. Binary response models are dependent on the threshold which
 defines a non-detection. This cutoff threshold is a function of 1) the
-standard curve, which defines the [eDNA] that corresponds to the
+standard curve, which defines the ln[eDNA] that corresponds to the
 threshold value, and 2) and researcher decisions. For example, in
 response to the level of sensitivity of an assay, some researchers
 might use a maximum Cq threshold of 35 cycles, while others use 40
-cycles. Thus the [eDNA] which corresponds to the maximum Cq value for
+cycles. Thus the ln[eDNA] which corresponds to the maximum Cq value for
 a particular set of extractions varies between studies and "presence"
 across studies can refer to different actual concentrations of eDNA.
 
 One solution to this quandary is to model either the Cq values
-themselves or concentration/copy number (back-calculated from the Cq
-values via the standard curve) as a continuous response variable.
+themselves or concentration/copy number as a continuous response variable.
 This response variable is then analyzed using a linear model to
-estimate the effects of various covariates on [eDNA].  In particular,
-using the [eDNA] or copy number values back-transformed from the
-observed Cq values avoids some of the above issues. Similar to the
+estimate the effects of various covariates on ln[eDNA].  In particular,
+using the ln[eDNA] or copy number avoids some of the above issues. Similar to the
 binary response variable, modeling this response can be accomplished
 using common statistical software. However, the continuous Cq,
 concentration, or copy number is still associated with the detection
@@ -51,9 +49,9 @@ but its exact value is unknown. A naive analysis of censored data
 which does not take this into account (such as the linear modeling of
 Cq, [eDNA], or copy number described above) will overestimate
 the certainty in values near or at the threshold. In eDNA studies, this
-means that when all [eDNA] values are relatively high, i.e. far from
+means that when all ln[eDNA] values are relatively high, i.e. far from
 the censoring point, the censoring point has negligible impact on the
-analysis. When there are values are near the censoring point,
+analysis. When there are values are near the censoring point (that is, near the limit of detection),
 estimates will be biased.
 
 Therefore, there is a need to take the above issues into consideration
@@ -62,10 +60,9 @@ statistical programs.
 
 ## Modeling qPCR eDNA Data with `artemis` {#mod_str}
 
-To address the above weaknesses of common statistical analysis
-techniques with qPCR eDNA data, we created the `artemis` R package to implement 
+We created the `artemis` R package to implement 
 Bayesian censored latent variable
-models. Additionally, `artemis` includes utilities to aid in the
+models, which mitigate the weaknesses of common statistical analysis techniques applied to qPCR data. Additionally, `artemis` includes utilities to aid in the
 design and analysis of eDNA survey studies, including simulation and
 power analysis functions.
 
@@ -83,39 +80,39 @@ power analysis functions.
 
 At its core, `artemis` is a specialized Generalized Linear
 Model, where the predictors are assumed to additively affect the
-response variable, in this case $log[eDNA]$, 
+response variable, in this case $ln[eDNA]$, 
 
-$$ log[eDNA]_{i} = X_{i} \beta $$ 
+$$ ln[eDNA]_{i} = X_{i} \beta $$ 
 
-where $\beta$ is a vector of effects on $log[eDNA]_{i}$, and $X_{i}$
+where $\beta$ is a vector of effects on $ln[eDNA]_{i}$, and $X_{i}$
 is a vector of predictors.  Since `artemis` directly models the
 effect of the predictors on the latent (unobserved) variable, [eDNA],
 it is unnecessary for the researcher to back-transform the data prior
 to modeling. Internally, `artemis` conducts this conversion using the
 user-supplied values for the formula,
 
-$$\hat{Cq_i} = \alpha_{std\_curve} + \beta_{std\_curve}* log[eDNA]_i  $$
+$$\hat{Cq_i} = \alpha_{std\_curve} + \beta_{std\_curve}* ln[eDNA]_i  $$
 
 Where $\alpha_{std\_curve}$ and $\beta_{std\_curve}$ are fixed values
 from setting the standard curve in the lab prior to qPCR.  
 
-Internally, the back-transformed $log[eDNA]_i$ values are considered a
-sample with measurement error from the true $log[eDNA]_i$ value
-($\hat{log[eDNA]_i}$) in the extract. 
+Internally, the back-transformed $ln[eDNA]_i$ values are considered a
+sample with measurement error from the true $ln[eDNA]_i$ value
+($\hat{ln[eDNA]_i}$) in the extract. 
 
-$$ log[eDNA]_i \sim Trunc. Normal(\hat{log[eDNA]_i}, \sigma_{Cq}, U) $$
+$$ ln[eDNA]_i \sim Trunc. Normal(\hat{ln[eDNA]_i}, \sigma_{Cq}, U) $$
 
-Where the observed $log[eDNA]_i$ values are censored at the
+Where the observed $ln[eDNA]_i$ values are censored at the
 predetermined threshold, $U$. This threshold is back-transformed from
-the threshold on Cq. Importantly, the $\hat{log[eDNA]}$ values in
+the threshold on Cq. Importantly, the $\hat{ln[eDNA]}$ values in
 the model are not censored, allowing the latent variable to reflect the "true"
-[eDNA] beyond the censorship point. The likelihood that a sampled $log[eDNA]$
+[eDNA] beyond the censorship point. The likelihood that a sampled $ln[eDNA]$
 value will exceed the threshold is a function of the measurement error
-and the estimated latent $\hat{log[eDNA]_i}$ value. We calculate this
+and the estimated latent $\hat{ln[eDNA]_i}$ value. We calculate this
 likelihood using the normal
 cumulative distribution function, $\Phi()$,
 
-$$ Pr[log[eDNA]_i > U ] = 1 - \Phi(\hat{log[eDNA]_i} - \mu_i / \sigma)$$
+$$ Pr[ln[eDNA]_i > U ] = 1 - \Phi(\hat{ln[eDNA]_i} - \mu_i / \sigma)$$
 
 Thus, the models in `artemis` account for the data censoring process by
 accounting for the probability that the observed value will exceed the
@@ -134,9 +131,9 @@ zero observations
 
 This model formulation makes several assumptions:
  
-  1. $log[eDNA]$ is assumed to be uniform within a sample.
+  1. $ln[eDNA]$ is assumed to be uniform within a sample.
   
-  2. $log[eDNA]$ is sampled with normally distributed errors.
+  2. $ln[eDNA]$ is sampled with normally distributed errors.
   	
   3. There are no false detections, i.e. the measurement error cannot
     result in a positive detection when eDNA is not present in the
@@ -145,7 +142,7 @@ This model formulation makes several assumptions:
 Importantly, this formulation produces estimates of the effect sizes
 which:
 
-  - are modeled directly on $log[eDNA]$ or copy number, rather than Cq, *therefore are independent of the standard curve and can be compared between studies that use different standard curves*. <!-- @Scott or @Matt:
+  - are modeled directly on $ln[eDNA]$ or copy number, rather than Cq, *therefore are independent of the standard curve and can be compared between studies that use different standard curves*. <!-- @Scott or @Matt:
   can we compare between studies that use different assays though?
   -->
   

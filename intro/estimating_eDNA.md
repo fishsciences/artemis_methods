@@ -1,12 +1,11 @@
 ## Estimating [eDNA] via qPCR
 
-In eDNA samples, the amount of eDNA present in the sample is estimated
+In eDNA samples that undergo fluorescence-based quantitative real-time qPCR, the amount of eDNA present in the sample is estimated
 from the number of quantification cycles of qPCR (hereafter the “Cq”
-value) completed before amplification takes place during qPCR. In eDNA
-samples that are extracted and run through qPCR analysis, the
+value) completed before amplification takes place during qPCR. By this process, the
 concentration of eDNA is not directly measured. The relationship
 between eDNA concentration ([eDNA]) and Cq values is determined via a
-standard curve generated in the lab for the target species.  The
+standard curve generated in the lab from the assay for the target species.  The
 standard curve is specific to the lab reagents and techniques
 used. This standard curve formula typically takes the form:
 
@@ -57,13 +56,13 @@ variability).
 
 -->
 
-We addressed these issues by creating the `artemis` package for R. In
+In the process of addressing these issues in the analysis of our own eDNA data, we created the `artemis` package for R. In
 `artemis`, we implement a set of models which directly estimates the effect of
-the predictors on the latent (unobserved) variable [eDNA]. This is
-accomplished by linking [eDNA] to the observed response via the
+the predictors on the latent (unobserved) variable, the natural logarithmic concentration of eDNA (ln[eDNA]). This is
+accomplished by linking ln[eDNA] to the observed response (Cq) via the
 standard curve parameters.  The goal of this paper is to introduce the
 censored latent variable models in the `artemis` R package and
-demonstrate how `artemis` can be used in the analysis of eDNA data.
+demonstrate how the `artemis` R package can be used in the analysis of eDNA data.
 We compare the performance of `artemis` to several other commonly-used
 modeling approaches in eDNA research and discuss the benefits and
 trade-offs for each.
