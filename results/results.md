@@ -6,7 +6,7 @@ Based on 500 simulated datasets, the standard linear mixed-effects
 models produced biased estimates. The estimates for the four
 generative parameters (Intercept, $\beta_{distance}$, $\beta_{volume}$,
 and $\sigma$), were all skewed from the true values used to generate
-the dataset. One effect of this bias was the 95% Credible Intervals
+the dataset (Fig. 1). One effect of this bias was the 95% Credible Intervals
 produced from the standard model did not include the true values in
 14% of cases, higher than the expected rate.
 
@@ -20,11 +20,11 @@ the expected range.
 
 When fit to the same experimental data, `artemis` models demonstrated
 favorable characteristics compared to alternative models. While the
-differences in parameter estimates were relatively small, the
+differences in parameter estimates were relatively small (Table 1), the
 predictive performance as measured by the Pareto-Smoothed
 Leave-One-Out Information Criteria suggested the `artemis` models fit
-the data <!--better?--> compared to widely-used
-alternatives. Furthermore, when the parameter estimates for each model
+the data better compared to widely-used
+alternatives (Table 2). Furthermore, when the parameter estimates for each model
 were used to predict data for a second set of experimental data, the
 `artemis` models had lower Root Mean Square Error (RMSE) on the
 predictions.
@@ -39,13 +39,13 @@ line.](analysis/figs/coef_est_compare.png)
 show up in @Von's pdf-->
 
 In a comparison between `artemis` models and a binomial mixed-effects
-model fit to the same data, the binomial data showed both better
-precision and recall for the in-sample data, relative to the `artemis`
+model fit to the same data (Table 3), the binomial data showed both better
+precision and recall for the in-sample data relative to the `artemis`
 model (0.92 vs. 0.72 precision; 0.94 vs. 0.88 recall). However, when
 used to classify out-of-sample data, the binomial model's performance
 showed similar results to the `artemis` predictions in precision (0.57
 vs 0.56 precision), but worse recall (0.69 vs 0.77 recall). This
 suggests that the binomial data was overfit to the original
-data. Futhermore, the binomial model would produce more false
+data. These metrics suggest the binomial model would produce more false
 negatives compared to the `artemis` classification predicting the same
 data.

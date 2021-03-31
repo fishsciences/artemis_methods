@@ -54,7 +54,7 @@ specifies the random effects in the model with,
 
 Both model types are fit using a Bayesian model fit via the Stan MCMC
 program [@stan]. In both `artemis` modeling functions, additional
-parameters can be passed to control the MCMC via the "`...`"
+parameters can be passed to control the MCMC algorithm via the "`...`"
 arguments.
 
 Next, the simulation functions `sim_eDNA_lm()` and
@@ -90,5 +90,5 @@ The `artemis` package also includes methods for R's `plot()`,
 `summary()`, `data.frame()`, and `predict()` functions for the
 `eDNA_model` and `eDNA_simulation` classes. For further information,
 please refer to the package vignettes and tutorials at
-[https://fishsciences.github.io/artemis/](https://fishsciences.github.io/artemis/index.html).
+[`https://fishsciences.github.io/artemis/`](https://fishsciences.github.io/artemis/index.html).
 

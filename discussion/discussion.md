@@ -16,11 +16,11 @@ case of censored data such as data from qPCR eDNA studies, these
 assumptions do not hold and a more appropriate model is needed to get
 unbiased estimates and accurate intervals. Here, we demonstrate both
 the bias introduced by data censorship, and how this bias is not
-present with models which explicitly account for data-censorship.
-The `artemis` R package provides a simple replacement for standard
-linear models in R, but using underlying these statistical models which
-account for the data censorship. Additionally, `artemis` includes many
-convienence functions for working with model estimates. 
+present with models which explicitly account for data-censorship.  The
+`artemis` R package provides a simple replacement for standard linear
+models in R, but uses statistical models which account for the data
+censorship inherent in qPCR data. Additionally, `artemis` includes
+many convienence functions for working with model estimates.
 
 We demonstrate here that artemis had better performance in multiple
 metrics compared to standard linear models, against both simulated and
@@ -28,7 +28,9 @@ observed data. While we demonstrate here that biased estimates are
 possible when fitting standard linear models to censored data, the
 degree of bias will depend on the exact characteristics of the
 dataset. In general, the more observations which experience
-censorship, the more bias there can be in the estimates.
+censorship, the more bias there can be in the estimates. We
+demonstrate here that this can invalidate computed Credible
+Intervals. 
 
 When the primary concern is presence/absence of a species, we
 demonstrate here that `artemis` models have desirable characteristics

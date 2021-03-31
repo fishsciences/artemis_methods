@@ -22,7 +22,7 @@ corresponds to a non-zero eDNA concentration.  Since “non-detection”
 is taken to be any sample which requires more than the threshold
 number of cycles to detect, there is a data censoring process
 occuring. Crucially, because the Cq values are dependent on the
-standard curve and hence specifics to a particular lab, the censoring
+standard curve and hence specifics of a particular lab, the censoring
 point is also lab dependent. 
 
 
@@ -36,7 +36,11 @@ unobserved variable of [eDNA]
 This censoring process can create several issues for analyzing eDNA
 data. The most concerning issue is that not taking this data censoring process
 into account in the analysis can lead to biases in model estimates, and in turn to
-invalid confidence or credible intervals. 
+invalid confidence or credible intervals. Additionally, when there is
+a large amount of data "clustered" at the censoring point, the
+estimated measurement error will be artificially low. This can give
+unrealistic expectations for how certain predictions or future
+sampling will be.  
 
 <!-- Not sure if we want to discuss since this was dropped from package
 
@@ -55,11 +59,12 @@ variability).
 
 We addressed these issues by creating the `artemis` package for R. In
 `artemis`, we implement a set of models which directly estimates the effect of
-the predictors on the latent (unobserved) variable, [eDNA]. This is
+the predictors on the latent (unobserved) variable [eDNA]. This is
 accomplished by linking [eDNA] to the observed response via the
 standard curve parameters.  The goal of this paper is to introduce the
 censored latent variable models in the `artemis` R package and
 demonstrate how `artemis` can be used in the analysis of eDNA data.
 We compare the performance of `artemis` to several other commonly-used
-modeling approaches in eDNA research.
+modeling approaches in eDNA research and discuss the benefits and
+trade-offs for each.
 

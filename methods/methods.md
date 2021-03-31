@@ -25,7 +25,7 @@ different eDNA modeling approaches, a linear mixed-effects model and
 the original parameters used to simulated the data. 
 
 For this task, only models which directly estimate effects on the
-latent or backtransformed ln[eDNA] values were compared. To further
+latent or back-transformed ln[eDNA] values were compared. To further
 make the results more directly comparible, the mixed-effects model was
 fit using the `rstanarm` R package(v2.21.1, @rstanarm), a Bayesian modeling package. The
 `rstanarm` and `artemis` packages both use the Stan probabilistic
@@ -41,36 +41,38 @@ code can be found at
 [`https://github.com/fishsciences/artemis_methods`](https://github.com/fishsciences/artemis_methods).
 Note that while `artemis` contains similar functions to simulate data,
 we opted to replicate the data outside of `artemis`'s functions for
-transparency. We also demonstrate the performance of `artemis` versus standard linear
- models using real-world data.
+transparency. 
 
 ## Experimental Data
 
  <!-- From help file for datasets --> 
- The data used were the qPCR
- results of two Delta Smelt live car experiments conducted in the
- primary channel of the Central Valley Project.  The experiments were
- completed on 2017-08-02, part of a series of 6 experiments total
- completed at the CVP with dead Delta Smelt in August-September
- of 2017.  The two experiments were identical in design and execution.
- 100 dead Delta Smelt were placed in a car and suspended from the
- primary louvers. From distances of 10-50m, 3 replicate filters were
- taken every 10m at 50mL and 200mL, sampled from near to far relative
- to the car.  Note that the car itself (Distance_m = ~0) was not
- actually sampled. Each filter was extracted and analyzed three times
- with qPCR (three technical replications). The qPCR data from these
- experiments is plotted in Figure X.
 
+The data used were the combined qPCR results from two Delta Smelt live car
+experiments conducted in the primary channel of the Central Valley
+Project (CVP) in the Sacramento - San Joaquin River Delta, California,
+USA.  The experiments were completed on 2017-08-02, part of a
+series of 6 experiments total completed at the CVP with dead Delta
+Smelt in August-September of 2017.  The two experiments were identical
+in design and execution.  100 dead Delta Smelt were placed in a car
+and suspended from the primary louvers. From distances of 10-50m, 3
+replicate filters were taken every 10m at 50mL and 200mL, sampled from
+near to far relative to the car.  Note that the car itself (Distance_m
+= ~0) was not actually sampled. Each filter was extracted and analyzed
+three times with qPCR (three technical replications). The qPCR data
+from these experiments is plotted in Figure X. To model these data, we
+assume a fixed effect of distance (m) and volume sampled (mL). For
+mixed-effects models, we assume a random intercept term for each
+unique filter (FilterID). 
 
-Two different methods were used in the comparison of model
+Two different methods were used to compare of model
 performance. First, the Pareto-Smoothed Leave-one-out Information
 Criteria was calculated for each model using the `loo` package in R
 [@loo]. This metric assesses a model's performance predicting
 out-of-sample data, which gives a measure of how will the model
 performs relative to the risk of overfitting to the data. Next, each
-model was used to predict the expected response values for a second
-dataset collected in the same system. This gives a real world example
-of prediction error for each model.
+model was used to predict the expected response values for a third
+experiment's dataset collected in the same system. This gives a real
+world example of prediction error for each model.
 
 <!-- Unsure about this - might need clarification --> 
 
