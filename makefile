@@ -5,7 +5,7 @@ METHODS = methods/methods.md
 DISCUSSION = discussion/discussion.md discussion/future_work.md
 TABS = analysis/tables.md 
 SECTIONS=abstract.md $(INTRO) $(METHODS) results/results.md  $(DISCUSSION) conclusion/conclusion.md $(TABS)
-FIGS = analysis/figs/coef_est_compare.png
+FIGS = analysis/figs/coef_est_compare.png analysis/figs/experimental_raw_data.png
 FORMAT=format.yaml
 BIB=artemis.bibtex
 
