@@ -3,12 +3,10 @@ title: "The `artemis` package for eDNA analysis in R"
 author:
   - Matthew B. Espe:
       institute: one_straw
-  - & Myfanwy Johnston:
+  - Myfanwy Johnston:
       institute: cfs
 	  correspondence: "yes"
 	  email: myfanwy.johnston@fishsciences.net
-  - Gregg Schumer:
-      institute: genidaqs
   - Scott Blankenship:
       institute: genidaqs
   - Cheryl Dean:
@@ -17,11 +15,13 @@ author:
       institute: empty
   - Matt Brennan:
       institute: esa
+  - Gregg Schumer:
+      institute: genidaqs
 institute:
-  - cfs: 'Cramer Fish Sciences'
   - one_straw: 'One Straw Consulting, LLC'
+  - cfs: 'Cramer Fish Sciences'
   - genidaqs: Genidaqs
-  - empty: '??'
+  - empty: 'TBD'
   - esa: "Environmental Science Associates"
 keywords: [Environmental DNA, qPCR, R, statistical modeling]
 geometry: margin=1in
