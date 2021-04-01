@@ -1,6 +1,6 @@
 ## Abstract {-}
 
-We introduce `artemis`, a new package for the R stastical programming
+We introduce `artemis`, a new package for the R statistical programming
 environment designed to analyze qPCR data from environmental DNA
 studies. The `artemis` package directly addresses several challenges
 for analyzing eDNA survey data, including the censorship of recorded
