@@ -15,6 +15,8 @@ author:
       institute: empty
   - Matt Brennan:
       institute: esa
+  - Andrew Schultz:
+      institute: bor
   - Gregg Schumer:
       institute: genidaqs
 institute:
@@ -22,6 +24,7 @@ institute:
   - cfs: 'Cramer Fish Sciences'
   - genidaqs: Genidaqs
   - empty: 'TBD'
+  - bor: 'United States Bureau of Reclamation'
   - esa: "Environmental Science Associates"
 keywords: [Environmental DNA, qPCR, R, statistical modeling]
 geometry: margin=1in
