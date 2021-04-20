@@ -119,16 +119,18 @@ accounting for the probability that the observed value will exceed the
 threshold. As detection limits vary with genetic assay, the upper
 threshold on Cq in the model is adjustable by the user.
 
-<!-- Not in current version
-
-Lastly, there is an optional zero-inflated component in the model. From
-multiple experiments, it was observed there can be near-zero
-concentrations of eDNA even in situations where higher concentrations
-were expected. This was attributed to filter failures. The expected
-probability of this occuring is user-provided, and allows for "true"
-zero observations
-   -->
-
+Lastly, there is an optional zero-inflated versions of both models,
+`eDNA_lm_zinf()` and `eDNA_lmer_zinf()`. From multiple experiments, it
+was observed there can be near-zero concentrations of eDNA even in
+situations where higher concentrations were expected. This was
+attributed to filter failures or other issues with sampling. To
+account for this mechanism, the zero-inflated versions of the models
+allow for zero [eDNA] concentrations from a secondary
+mechanism. Currently, the functions do not support user-provided
+predictors on the zero-inflated component, and just estimate a flat
+probability of zero detections for all observations. However, users
+can provide a prior for the expected probability of "true" zero
+observations from a secondary mechanism.
 This model formulation makes several assumptions:
  
   1. $ln[eDNA]$ is assumed to be uniform within a sample.
