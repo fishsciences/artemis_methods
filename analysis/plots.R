@@ -20,19 +20,49 @@ marrangeGrob(aa, nrow = 2, ncol = 2)
 dev.off()
 
 # Raw data plot - Fig 1
+library(elaphos)
 d = rbind(elaphos::cvp01, elaphos::cvp02)
+# Need standard curve
+i = match(d$StdCrvID, StdCrvKey$StdCrvID)
+a = StdCrvKey$StdCrvAlpha_lnForm[i]
+b = StdCrvKey$StdCrvBeta_lnForm[i]
 
-ggplot(d, aes(x = Distance_m, y = Cq)) +
-  geom_jitter(aes(color = factor(Volume_mL)), 
-              width = 0.75,
-              shape = 1,
-              size = 1.5,
-              stroke = 0.75) +
-  fishpals::scale_color_fishpals("greensunfish", discrete = TRUE) +
-  theme_minimal() +
-  guides(color = guide_legend(title = "Filtered Volume (mL)")) +
-  theme(legend.direction = "horizontal",
-        legend.position = "top")
+d$ln_eDNA = artemis::cq_to_lnconc(d$Cq, a, b)
+
+v40 = artemis::cq_to_lnconc(40.0, unique(a), unique(b))
+
 
 png("figs/experimental_raw_data.png", 8, 5, "in", res = 300)
+
+ggplot(d, aes(x = factor(Distance_m), y = ln_eDNA)) +
+  geom_jitter(
+    size = 1,
+    alpha = 0.5,
+    shape = 1,
+    aes(color = factor(Volume_mL)),
+    position = position_jitterdodge(jitter.width = 0.05, 
+                                    dodge.width = 0.55
+                                    ),
+    show.legend = FALSE
+  ) +
+  geom_boxplot(
+     alpha = 0.25,
+    aes(color = factor(Volume_mL),
+        fill = factor(Volume_mL)),
+    position = position_dodge(width = 0.5),
+    width = 0.25,
+    size = 0.4,
+    outlier.shape = NA
+  ) +
+  geom_hline(aes(yintercept = v40), lty = 2, size = 0.45) +
+  scale_color_manual(values = c("gray45", "gray10")) +
+  scale_fill_manual(values = c("gray45", "gray10")) +
+
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(x = "Distance (m) from live car",
+       y = "ln[eDNA]") +
+  guides(color = guide_legend(title = "Filtered volume (mL)"),
+         fill = guide_legend(title = "Filtered volume (mL)"))
+
 dev.off()

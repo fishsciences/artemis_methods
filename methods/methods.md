@@ -73,8 +73,7 @@ each unique filter (FilterID).
 Fish Collection Facility (TFCF) in the Central Valley Project (CVP),
 California, USA. These data were used to test different analysis
 techniques for environmental DNA (eDNA) survey data. Each point
-represents one technical replicate. The maximum number of Cq cycles
-attempted was 40.](analysis/figs/experimental_raw_data.png)
+represents one technical replicate. The Cq of each technical replicate has been converted to ln[eDNA] via the standard curve, where $ln[eDNA] = (Cq - \alpha_{StdCurve}) / \beta_{StdCurve}$.](analysis/figs/experimental_raw_data.png)
 
 Two different methods were used to compare model performance. First,
 the Pareto-Smoothed Leave-one-out Information Criteria was calculated
