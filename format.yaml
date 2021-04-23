@@ -11,7 +11,7 @@ author:
       institute: genidaqs
   - Cheryl Dean:
       institute: genidaqs
-  - Mark Bowen:
+  - Mark D. Bowen:
       institute: empty
   - Matt Brennan:
       institute: esa
@@ -30,4 +30,7 @@ keywords: [Environmental DNA, qPCR, R, statistical modeling]
 geometry: margin=1in
 numbersections: true
 bibliography: artemis.bibtex
+header-includes:
+  - \usepackage{draftwatermark}
+  - \SetWatermarkText{Draft}
 ---

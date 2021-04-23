@@ -4,14 +4,14 @@ We were motivated to create the `artemis` package out of the need for better con
 have detected the species of interest if it were within a certain
 distance from the sampling site?", we needed to understand the
 parameters of the sampling regime in that system. For example, how
-quickly did the concentration of eDNA fall off with distance? How much did the filtered
+quickly did the concentration of eDNA decrease with distance? How much did the filtered
 volume of water increase the concentration of eDNA in the filter? We first tried to address these questions using off-the-shelf statistical models, but the results
 were not robust.
 
 The parameter estimates and confidence/credible intervals from a
 statistical model are dependent upon the assumptions of the model being met. In the
 case of censored data such as data from qPCR eDNA studies, these
-assumptions do not hold and a more appropriate model is needed to get
+assumptions do not hold for a standard linear model and a more appropriate model is needed to get
 unbiased estimates and accurate intervals. Here, we demonstrate both
 the bias introduced by data censorship, and how this bias is not
 present with models which explicitly account for data-censorship.  By mimicking the syntax of the `lmer` package and the `lm` function in base R, the

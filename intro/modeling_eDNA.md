@@ -22,7 +22,7 @@ analysis within a study versus the difficulty in comparing between
 studies. Binary response models are dependent on the threshold which
 defines a non-detection. This cutoff threshold is a function of 1) the
 standard curve, which defines the ln[eDNA] that corresponds to the
-threshold value, and 2) and researcher decisions. For example, in
+threshold value, and 2) researcher decisions. For example, in
 response to the level of sensitivity of an assay, some researchers
 might use a maximum Cq threshold of 35 cycles, while others use 40
 cycles. Thus the ln[eDNA] which corresponds to the maximum Cq value for
@@ -51,7 +51,7 @@ Cq, [eDNA], or copy number described above) will overestimate
 the certainty in values near or at the threshold. In eDNA studies, this
 means that when all ln[eDNA] values are relatively high, i.e. far from
 the censoring point, the censoring point has negligible impact on the
-analysis. When there are values are near the censoring point (that is, near the limit of detection),
+analysis. When there are values near the censoring point (that is, near the limit of detection),
 estimates will be biased.
 
 Therefore, there is a need to take the above issues into consideration

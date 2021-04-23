@@ -47,39 +47,44 @@ transparency.
 
  <!-- From help file for datasets --> 
 
-The data used were the combined qPCR results from two Delta Smelt live car
-experiments conducted in the primary channel of the Central Valley
-Project (CVP) in the Sacramento - San Joaquin River Delta, California,
-USA.  The experiments were completed on 2017-08-02, part of a
-series of 6 experiments total completed at the CVP with cultured, euthenized Delta
-Smelt in August-September of 2017.  The two experiments were identical
-in design and execution.  100 euthenized Delta Smelt were placed in a car
-and suspended from the primary louvers. From distances of 10-50m, three
-replicate filters were taken every 10m at 50mL and 200mL, sampled from
-near to far relative to the car.  Note that the car itself (Distance_m
-= ~0) was not actually sampled. Each filter was extracted and analyzed
-three times with qPCR (three technical replications). The qPCR data
-from these experiments is plotted in Figure 1. All sampling and extraction procedures followed those described in Schumer et al. 2019 [@schumer_utilizing_2019]. To model these data, we
-assume a fixed effect of distance (m) and volume sampled (mL). For
-mixed-effects models, we assume a random intercept term for each
-unique filter (FilterID). 
+The data used were the combined qPCR results from two Delta Smelt live
+car experiments conducted in the primary Intake Channel of the Tracy
+Fish Collection Facility (TFCF). The TFCF collects fish before they
+are permanently entrained into the US Bureau of Reclamation’s Central
+Valley Project (CVP). This water intake is located the southwest
+portion of the CVP in the Sacramento - San Joaquin River Delta,
+California, USA [@bowen2004].  The experiments were completed on 2017-08-02, part
+of a series of 6 experiments total completed at the CVP with cultured,
+euthenized Delta Smelt in August-September of 2017.  The two
+experiments were identical in design and execution.  100 euthenized
+Delta Smelt were placed in a car and suspended from the primary
+louvers. From distances of 10-50m, three replicate filters were taken
+every 10m at 50mL and 200mL, sampled from near to far relative to the
+car.  Note that the car itself (Distance_m = ~0) was not actually
+sampled. Each filter was extracted and analyzed three times with qPCR
+(three technical replications). The qPCR data from these experiments
+is plotted in Figure 1. All sampling and extraction procedures
+followed those described in @schumer_utilizing_2019. To model these
+data, we assume a fixed effect of distance (m) and volume sampled
+(mL). For mixed-effects models, we assume a random intercept term for
+each unique filter (FilterID).
 
-![Plot of experimental livecar data from two experiments at the
-Central Valley Project (CVP), California, USA. These data were used to test
-different analysis techniques for environmental DNA (eDNA) survey
-data. Each point represents one technical replicate. The maximum
-number of Cq cycles attempted was
-40.](analysis/figs/experimental_raw_data.png)
+![Plot of experimental livecar data from two experiments at the Tracy
+Fish Collection Facility (TFCF) in the Central Valley Project (CVP),
+California, USA. These data were used to test different analysis
+techniques for environmental DNA (eDNA) survey data. Each point
+represents one technical replicate. The maximum number of Cq cycles
+attempted was 40.](analysis/figs/experimental_raw_data.png)
 
-Two different methods were used to compare of model
-performance. First, the Pareto-Smoothed Leave-one-out Information
-Criteria was calculated for each model using the `loo` package in R
-[@loo]. This metric assesses a model's performance predicting
-out-of-sample data, which gives a measure of how will the model
-performs relative to the risk of overfitting to the data. Next, each
-model was used to predict the expected response values for a third
-experiment's dataset collected in the same system. This gives a real
-world example of prediction error for each model.
+Two different methods were used to compare model performance. First,
+the Pareto-Smoothed Leave-one-out Information Criteria was calculated
+for each model using the `loo` package in R [@loo]. This metric
+assesses a model's performance predicting out-of-sample data, which
+gives a measure of how well the model performs relative to the risk of
+overfitting to the data. Next, each model was used to predict the
+expected response values for a third experiment's dataset collected in
+the same system. This gives a realistic example of prediction error
+for each model.
 
 <!-- Unsure about this - might need clarification --> 
 

@@ -6,7 +6,7 @@ Based on 500 simulated datasets, the standard linear mixed-effects
 models produced biased estimates. The estimates for the four
 generative parameters (Intercept, $\beta_{distance}$, $\beta_{volume}$,
 and $\sigma$), were all skewed from the true values used to generate
-the dataset (Fig. 2). One effect of this bias was the 95% Credible Intervals
+the dataset (Figure 2). One effect of this bias was the 95% Credible Intervals
 produced from the standard model did not include the true values in
 14% of cases, higher than the expected rate.
 
@@ -45,7 +45,7 @@ model (0.92 vs. 0.72 precision; 0.94 vs. 0.88 recall). However, when
 used to classify out-of-sample data, the binomial model's performance
 showed similar results to the `artemis` predictions in precision (0.57
 vs 0.56 precision), but worse recall (0.69 vs 0.77 recall). This
-suggests that the binomial data was overfit to the original
+suggests that the binomial model was overfit to the original
 data. These metrics suggest the binomial model would produce more false
 negatives compared to the `artemis` classification predicting the same
 data.
