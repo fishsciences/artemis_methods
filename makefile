@@ -3,21 +3,36 @@ LUA_FILTERS = $(HOME)/lua-filters/filters
 INTRO = intro/intro.md intro/estimating_eDNA.md intro/modeling_eDNA.md intro/package_desc.md
 METHODS = methods/methods.md
 DISCUSSION = discussion/discussion.md discussion/future_work.md
-TABS = analysis/tables.md 
-SECTIONS=abstract.md $(INTRO) $(METHODS) results/results.md  $(DISCUSSION) conclusion/conclusion.md acknowledgements.md $(TABS)
-FIGS = analysis/figs/coef_est_compare.png analysis/figs/experimental_raw_data.png
+TABS = analysis/tables.md
+FIGS = figure_caps.md figures.md
+SECTIONS=abstract.md $(INTRO) $(METHODS) results/results.md  $(DISCUSSION) conclusion/conclusion.md acknowledgements.md $(TABS) $(FIGS)
+# FIGS = analysis/figs/coef_est_compare.png analysis/figs/experimental_raw_data.png
 FORMAT=format.yaml
 BIB=artemis.bibtex
 
+SUBMISSION=artemis_pkg.pdf
 MANUSCRIPT=artemis_methods.pdf
 DOC=artemis_methods.docx
 MD=artemis_methods.md
+
 
 $(MANUSCRIPT): $(SECTIONS) $(FORMAT) $(FIGS) $(BIB)
 	$(PANDOC) --citeproc \
 		--lua-filter=$(LUA_FILTERS)/scholarly-metadata.lua \
         --lua-filter=$(LUA_FILTERS)/author-info-blocks.lua \
         --verbose -s -o $@ $(SECTIONS) $(FORMAT)
+
+$(SUBMISSION): $(SECTIONS) sub_format.yaml $(FIGS) $(BIB)
+	$(PANDOC) --citeproc \
+		--lua-filter=$(LUA_FILTERS)/scholarly-metadata.lua \
+        --lua-filter=$(LUA_FILTERS)/author-info-blocks.lua \
+        --verbose -s -o $@ $(SECTIONS) --metadata-file sub_format.yaml
+
+title_page.pdf: title_page.md acknowledgements.md $(FORMAT)
+	$(PANDOC) \
+		--lua-filter=$(LUA_FILTERS)/scholarly-metadata.lua \
+        --lua-filter=$(LUA_FILTERS)/author-info-blocks.lua \
+		-o $@ title_page.md acknowledgements.md $(FORMAT)	
 
 $(DOC): $(SECTIONS) $(FORMAT) $(FIGS) $(BIB)
 	$(PANDOC) --citeproc --verbose -s -o $@ $(SECTIONS) $(FORMAT)

@@ -1,5 +1,6 @@
 ---
 title: "The `artemis` package for eDNA analysis in R"
+subtitle: "An R package for the design and analysis of environmental DNA studies."
 author:
   - Matthew B. Espe:
       institute: one_straw
@@ -20,7 +21,7 @@ author:
   - Gregg Schumer:
       institute: genidaqs
 institute:
-  - one_straw: 'One Straw Consulting, LLC'
+  - one_straw: 'One Straw Consulting, LLC, 798 Chalk Ave. Loveland, CO 80537'
   - cfs: 'Cramer Fish Sciences'
   - genidaqs: Genidaqs
   - empty: 'TBD'
@@ -31,6 +32,8 @@ geometry: margin=1in
 numbersections: true
 bibliography: artemis.bibtex
 header-includes:
-  - \usepackage{draftwatermark}
-  - \SetWatermarkText{Draft}
+  # - \usepackage{draftwatermark}
+  # - \SetWatermarkText{Draft}
+  # - \usepackage{lineno}
+  # - \linenumbers
 ---

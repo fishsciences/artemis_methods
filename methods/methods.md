@@ -69,13 +69,6 @@ data, we assume a fixed effect of distance (m) and volume sampled
 (mL). For mixed-effects models, we assume a random intercept term for
 each unique filter (FilterID).
 
-![Plot of experimental livecar data from two experiments at the Tracy
-Fish Collection Facility (TFCF) in the Central Valley Project (CVP),
-California, USA. These data were used to test different analysis
-techniques for environmental DNA (eDNA) survey data. Each point
-represents one technical replicate. The maximum number of Cq cycles
-attempted was 40.](analysis/figs/experimental_raw_data.png)
-
 Two different methods were used to compare model performance. First,
 the Pareto-Smoothed Leave-one-out Information Criteria was calculated
 for each model using the `loo` package in R [@loo]. This metric
