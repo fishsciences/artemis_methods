@@ -1,0 +1,9 @@
+---
+title: "The `artemis` package for eDNA analysis in R"
+header-includes: 
+  - \usepackage{lineno}
+  - \linenumbers
+geometry: margin=1in
+numbersections: true
+bibliography: artemis.bibtex
+---
