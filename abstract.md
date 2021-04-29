@@ -16,4 +16,5 @@ appropriate analysis approach for eDNA survey data.
 
 <!-- Help! Needs work! -->
 
-**Keywords:** environmental DNA, qPCR, R, statistical modeling
+**Keywords:** Environmental DNA, Linear Models, Models (Statistical),
+Biometry, Data Analysis, Real-Time Polymerase Chain Reaction
