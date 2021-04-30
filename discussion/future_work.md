@@ -15,7 +15,7 @@ as concentrations of eDNA decrease. During the Beta development
 stage, we implemented a basic parameterization to allow for this in
 the model. This initial attempt was based on normally distributed
 errors which increase as concentrations decrease. However, the errors
-appear to be more likely Poisson distributed (citation). Initial
+appear to be more likely Poisson distributed<!--(citation needed?)-->. Initial
 testing reveals some issues with using normally distributed errors.
 Further work is needed to evaluate and implement the most robust
 method to model the mechanisms involved.

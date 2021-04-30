@@ -52,14 +52,14 @@ are permanently entrained into the US Bureau of Reclamation’s Central
 Valley Project (CVP). This water intake is located the southwest
 portion of the CVP in the Sacramento - San Joaquin River Delta,
 California, USA [@bowen2004].  The data used here are from an experiment completed on 2017-08-02, part
-of a series of live car experiments at the CVP in coordination with the Tracy Fish Collection Facility in August-September of 2017.  100 live (cultured)
+of a series of live car experiments at the CVP in coordination with the Tracy Fish Collection Facility in August-September of 2017.  All water filtering, eDNA extraction, and qPCR analysis procedures associated with the experiment
+followed those described in @schumer_utilizing_2019.  100 live (cultured)
 Delta Smelt were placed in a rigid, meshed enclosure (the "live car") and suspended from the primary
-louvers in the intake channel. Two sets of three filters each were taken
-at 10m intervals, from 10m-50m, in the downstream direction relative to the live car.  The first set of replicate samples pulled 50mL of water through each filter; the second set of samples pulled 200mL per filter. This procedure was then replicated in the upstream direction relative to the live car. Note that the car itself (distance = ~0m) was not actually
+louvers in the intake channel. Two sets of three water samples each were taken
+at 10m intervals, from 10m-50m, from near to far in the downstream direction relative to the live car.  The first set of samples pulled 50mL of water through each filter; the second set of samples pulled 200mL per filter. This procedure was then replicated in the upstream direction (far to near) relative to the live car. Note that the car itself (distance = ~0m) was not actually
 sampled. Approval for this experiment was via United States Fish and Wildlife Service (protocol 2017 §10(a)(1)(A) recovery permit TE-027742-5) and California Department of Fish and Wildlife (protocol 2017 MOU under Scientific Collecting Permit SC-005544). Each filter was extracted and analyzed three times with qPCR
 (three technical replications). The qPCR data from these experiments
-is plotted in Figure 1. All filtering, extraction, and qPCR analysis procedures
-followed those described in @schumer_utilizing_2019. 
+is plotted in Figure 1. 
 
 To model these
 data, we assume a fixed effect of distance (m) and volume sampled
