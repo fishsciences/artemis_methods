@@ -21,7 +21,7 @@ $(TABS) &: tables.Rmd $(SIM_RESULTS) $(MODEL_FITS) $(MODEL_LOO) | output
 	$(KNIT)
 
 clean:
-	rm -rf output/* tables.md
+	rm -rf output/* tables.md figs/*
 
 output:
 	mkdir output

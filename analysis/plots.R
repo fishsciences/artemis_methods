@@ -16,7 +16,7 @@ coef_list_art = lapply(1:4, function(i)
 aa = mapply(mk_coef_plot, coef_list_lmer, coef_list_art, true_vals, rownames(lmer_ests[[1]]), SIMPLIFY = FALSE)
 
 png("figs/coef_est_compare.png", 8, 5, "in", res = 300)
-marrangeGrob(aa, nrow = 2, ncol = 2)
+marrangeGrob(aa, nrow = 2, ncol = 2,top = "")
 dev.off()
 
 # Raw data plot - Fig 1

@@ -5,6 +5,8 @@ library(artemis)
 library(rstanarm)
 library(loo)
 
+# Need multicore to make this run in a reasonable time frame
+options(mc.cores = parallel::detectCores()/2)
 # Set once here so we can easily swap the experiment here
 d = rbind(cvp01, cvp02)
 
@@ -30,7 +32,7 @@ mod_lm = stan_glm(ln_eDNA  ~ Distance_m + Volume_mL,
                 data = d, family = "gaussian")
 
 # comparison: prediction - errors
-loo_art = artemis::loo(mod_art)
+loo_art = loo(mod_art)
 loo_lm = loo(mod_lm)
 
 loo_compare(loo_art, loo_lm)
@@ -52,7 +54,7 @@ mod_lmer = stan_glmer(ln_eDNA  ~ Distance_m + Volume_mL + (1|FilterID),
 saveRDS(mod_lmer, file = "output/rstanarm_lmer_fit.rds")
 
 # comparison: prediction - errors
-loo_arter = artemis::loo(mod_arter)
+loo_arter = loo(mod_arter)
 loo_lmer = loo(mod_lmer, cores = 4)
 
 comp = loo_compare(art = loo_art, art_lmer = loo_arter, loo_lm, loo_lmer)
@@ -69,15 +71,16 @@ b2 = StdCrvKey$StdCrvBeta_lnForm[i]
 d2$ln_eDNA = (d2$Cq - a2) / b2
 
 lmer_pred = posterior_predict(mod_lmer, newdata = d2)
-lmer_ln_eDNA = apply(lmer_pred, 2, mean)
+lmer_ln_eDNA = apply(lmer_pred, 2, median)
 lmer_Cq = lmer_ln_eDNA * b2 + a2
 lmer_Cq[lmer_Cq > 40] = 40
+
 
 # TODO: Fix artemis predict
 art_pred = predict(mod_arter, newdata = d2[,c("Distance_m", "Volume_mL")])
 
-art_ln_eDNA = apply(art_pred$ln_conc, 1, mean)
-art_Cq = apply(art_pred$Cq_hat, 1, mean)
+art_ln_eDNA = apply(art_pred$ln_conc, 1, median)
+art_Cq = apply(art_pred$Cq_hat, 1, median)
 art_Cq[art_Cq > 40] = 40
 
 par(mfrow = c(1, 2))
@@ -100,13 +103,10 @@ plot(d2$ln_eDNA, art_ln_eDNA)
 abline(0,1, lty = 2)
 abline(lm(d2$ln_eDNA ~ art_ln_eDNA))
 
-<<<<<<< HEAD
+sqrt(mean((d2$Cq - lmer_Cq) ^ 2))
+sqrt(mean((d2$Cq - art_Cq) ^ 2))
+
 #------------------------------------------------------------------------------#
-# compare binomial predictions
-d$presence = as.integer(d$Cq < 40)
-binom_mod = stan_glmer(ln_eDNA  ~ Distance_m + Volume_mL + (1|FilterID),
-                       data = d, family = "gaussian")
-=======
 # Binomial comparison:
 
 d$presence = as.integer(d$Cq < 40)
@@ -150,5 +150,5 @@ binom_comparision = data.frame(
     artemis_in_sample = recall_prec(art_pres, d$presence),
     binomial_out_sample = recall_prec(pred_pres_oos, d2$presence),
     artmis_out_sample = recall_prec(art_pres_oos, d2$presence))
+
 saveRDS(t(binom_comparision), file = "output/binom_compare.rds")
->>>>>>> 97729843a31ebf7a1f31f082cc2f4d18b3ee64c9
