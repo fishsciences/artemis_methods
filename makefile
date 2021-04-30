@@ -18,28 +18,28 @@ MD=artemis_methods.md
 submission: $(SUBMISSION) title_page.pdf
 
 $(MANUSCRIPT): $(SECTIONS) $(FORMAT) $(FIGS) $(BIB)
-	$(PANDOC) --citeproc \
+	pandoc --citeproc \
 		--lua-filter=$(LUA_FILTERS)/scholarly-metadata.lua \
         --lua-filter=$(LUA_FILTERS)/author-info-blocks.lua \
         --verbose -s -o $@ $(SECTIONS) $(FORMAT)
 
 $(SUBMISSION): $(SECTIONS) sub_format.yaml $(FIGS) $(BIB)
-	$(PANDOC) --citeproc \
+	pandoc --citeproc \
 		--lua-filter=$(LUA_FILTERS)/scholarly-metadata.lua \
         --lua-filter=$(LUA_FILTERS)/author-info-blocks.lua \
         --verbose -s -o $@ $(SECTIONS) --metadata-file sub_format.yaml
 
 title_page.pdf: title_page.md acknowledgements.md $(FORMAT)
-	$(PANDOC) \
+	pandoc \
 		--lua-filter=$(LUA_FILTERS)/scholarly-metadata.lua \
         --lua-filter=$(LUA_FILTERS)/author-info-blocks.lua \
 		-o $@ title_page.md acknowledgements.md $(FORMAT)	
 
 $(DOC): $(SECTIONS) $(FORMAT) $(FIGS) $(BIB)
-	$(PANDOC) --citeproc --verbose -s -o $@ $(SECTIONS) $(FORMAT)
+	pandoc --citeproc --verbose -s -o $@ $(SECTIONS) $(FORMAT)
 
 $(MD): $(SECTIONS) $(FORMAT) $(FIGS) $(BIB)
-	$(PANDOC) --citeproc --verbose -s -o $@ $(SECTIONS) $(FORMAT)
+	pandoc --citeproc --verbose -s -o $@ $(SECTIONS) $(FORMAT)
 
 test.md: $(SECTIONS) $(FORMAT) $(TABS_FIGS) $(BIB)
 	pandoc --citeproc --verbose -s -o $@ $(SECTIONS) $(FORMAT)

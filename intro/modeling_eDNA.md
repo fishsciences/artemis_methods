@@ -43,7 +43,7 @@ standard curve defines a censoring point for the response variable.
 
 Statistical censoring is a well studied phenomenon where data values
 above or below a certain threshold value are recorded as the threshold
-value (citation needed). In effect, this represents a partially
+value<!--does this need citation?-->. In effect, this represents a partially
 missing value - it is known that the value is beyond the threshold,
 but its exact value is unknown. A naive analysis of censored data
 which does not take this into account (such as the linear modeling of
