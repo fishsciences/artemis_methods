@@ -1,24 +1,10 @@
 # Methods
-<!--
-*Most of these are in the introduction.* 
-Explanation and presentation of model structure
-Presentation of alternative models
-Occupancy and how covariates are modeled when deriving probability of detection
-Binomial
-Beta-binomial
-Negative binomial
-Logistic regression
-Explanation of model comparison process and performance criteria
-Diagnostics
-Inferences
-Probability of detection
-Effect sizes
--->
+
 ## Simulation 
 
 To demonstrate the strength and utility of the `artemis` package for
 modeling eDNA data, we compare `artemis` models to standard
-mixed-effects analysis.  We simulated five hundred datasets using the
+mixed-effects analysis.  We simulated 500 datasets using the
 generative process outlined previously in [Section 1.4](#mod_str).  Then, we used two
 different eDNA modeling approaches, a linear mixed-effects model and
 `artemis`'s censored-data mixed-effects model to attempt to estimate
@@ -26,7 +12,7 @@ the original parameters used to simulate the data.
 
 For this task, only models which directly estimate effects on the
 latent or back-transformed ln[eDNA] values were compared. To further
-make the results more directly comparible, the mixed-effects model was
+make the results more directly comparable, the mixed-effects model was
 fit using the `rstanarm` R package(v2.21.1, @rstanarm), a Bayesian modeling package. The
 `rstanarm` and `artemis` packages both use the Stan probabilistic
 programming language to estimate parameters [@stan]. Furthermore, many of the
@@ -52,7 +38,7 @@ are permanently entrained into the US Bureau of Reclamation’s Central
 Valley Project (CVP). This water intake is located the southwest
 portion of the CVP in the Sacramento - San Joaquin River Delta,
 California, USA [@bowen2004].  The data used here are from an experiment completed on 2017-08-02, part
-of a series of live car experiments at the CVP in coordination with the Tracy Fish Collection Facility in August-September of 2017.  All water filtering, eDNA extraction, and qPCR analysis procedures associated with the experiment
+of a series of live car experiments at the CVP in coordination with the TFCF in August-September of 2017.  All water filtering, eDNA extraction, and qPCR analysis procedures associated with the experiment
 followed those described in @schumer_utilizing_2019.  100 live (cultured)
 Delta Smelt were placed in a rigid, meshed enclosure (the "live car") and suspended from the primary
 louvers in the intake channel. Two sets of three water samples each were taken

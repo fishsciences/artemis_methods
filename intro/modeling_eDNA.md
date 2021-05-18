@@ -3,7 +3,7 @@
 <!-- @Von - please insert these citations into the bib file and replace refs here -->
 
 qPCR data from eDNA studies are often modeled via a binary response
-model, e.g. occupancy models [@schmidt_site_2013] or some form of
+model, e.g. occupancy models [@schmidt_site_2013; @dorazio_2018] or some form of
 binomial regression [@moyer_assessing_2014; @song_making_2017;
 @hinlo_environmental_2017]. In these, the response is a binary
 variable signifying the presence/absence of eDNA in the sample. More
@@ -24,8 +24,8 @@ defines a non-detection. This cutoff threshold is a function of 1) the
 standard curve, which defines the ln[eDNA] that corresponds to the
 threshold value, and 2) researcher decisions. For example, in
 response to the level of sensitivity of an assay, some researchers
-might use a maximum Cq threshold of 35 cycles, while others use 40
-cycles. Thus the ln[eDNA] which corresponds to the maximum Cq value for
+might use a maximum Cq threshold of 35 cycles
+[@huver_development_2015], while others use 40 or even 45 cycles [@piggott_evaluating_2016]. Thus the ln[eDNA] which corresponds to the maximum Cq value for
 a particular set of extractions varies between studies and "presence"
 across studies can refer to different actual concentrations of eDNA.
 
@@ -49,38 +49,25 @@ but its exact value is unknown. A naive analysis of censored data
 which does not take this into account (such as the linear modeling of
 Cq, [eDNA], or copy number described above) will overestimate
 the certainty in values near or at the threshold. In eDNA studies, this
-means that when all ln[eDNA] values are relatively high, i.e. far from
-the censoring point, the censoring point has negligible impact on the
+means that when all ln[eDNA] values are relatively high (i.e. far from
+the censoring point) the censoring point has negligible impact on the
 analysis. When there are values near the censoring point (that is, near the limit of detection),
 estimates will be biased.
 
 Therefore, there is a need to take the above issues into consideration
-in the analysis, while also providing the ease of use of common
+in eDNA analyses, while also providing the ease of use of common
 statistical programs.
 
 ## Modeling qPCR eDNA Data with `artemis` {#mod_str}
 
-We created the `artemis` R package to implement 
-Bayesian censored latent variable
-models, which mitigate the weaknesses of common statistical analysis techniques applied to qPCR data. Additionally, `artemis` includes utilities to aid in the
-design and analysis of eDNA survey studies, including simulation and
-power analysis functions.
-
- <!-- probably cut this
- 
-  3. The potential sources of measurement error in the extraction and 
-     qPCR processes are difficult to separate and quantify. For
-     example, Cq values produced by qPCR become more variable at the
-     threshold of detection, i.e. as the number of eDNA molecules
-     available for amplification approaches zero.  This source of
-     variability in the response is different from that produced by
-     error introduced in the pipetting process, but they have the same
-     effect on Cq (namely, increasing variability).
--->
-
-At its core, `artemis` is a specialized Generalized Linear
-Model, where the predictors are assumed to additively affect the
-response variable, in this case $ln[eDNA]$, 
+We created the `artemis` R package to implement Bayesian censored
+latent variable models, which mitigate the weaknesses of common
+statistical analysis techniques applied to qPCR data. Additionally,
+`artemis` includes utilities to aid in the design and analysis of eDNA
+survey studies, including simulation and power analysis functions. At
+its core, `artemis` is a specialized Generalized Linear Model, where
+the predictors are assumed to additively affect the response variable,
+in this case $ln[eDNA]$,
 
 $$ ln[eDNA]_{i} = X_{i} \beta $$ 
 
@@ -130,37 +117,16 @@ mechanism. Currently, the functions do not support user-provided
 predictors on the zero-inflated component, and just estimate a flat
 probability of zero detections for all observations. However, users
 can provide a prior for the expected probability of "true" zero
-observations from a secondary mechanism.
-This model formulation makes several assumptions:
- 
-  1. $ln[eDNA]$ is assumed to be uniform within a sample.
-  
-  2. $ln[eDNA]$ is sampled with normally distributed errors.
-  	
-  3. There are no false detections, i.e. the measurement error cannot
-    result in a positive detection when eDNA is not present in the
-    sample. 
+observations from a secondary mechanism.  This model formulation makes
+several assumptions: 1) $ln[eDNA]$ is assumed to be uniform within a
+sample, 2) $ln[eDNA]$ is sampled with normally distributed errors, and
+3) there are no false detections, i.e. the measurement error cannot
+result in a positive detection when eDNA is not present in the sample.
 
 Importantly, this formulation produces estimates of the effect sizes
-which:
-
-  - are modeled directly on $ln[eDNA]$ or copy number, rather than Cq, *therefore are independent of the standard curve and can be compared between studies that use different standard curves*. <!-- @Scott or @Matt:
-  can we compare between studies that use different assays though?
-  -->
-  
-  - account for the data censoring at the upper limit of qPCR
-    cycles, *which properly accounts for uncertainty and reduces bias in the estimates.*
-	
-<!--
-  - directly model the measurement error on qPCR extraction, *allowing
-    quantification of the amount of uncertainty attributable to
-    uncertainty in the effect sizes vs. lab procedure.*
-
-In `artemis`, the model is specified using an R model formula, similar
-to the `lm()` or `lmer()` functions. This model formula is used to
-construct the model on $log[eDNA]$. The functions in `artemis`
-generalize to any eDNA survey data containing Cq values associated
-with a standard curve for the target species.
-
--->
-
+which: 1) are modeled directly on $ln[eDNA]$ or copy number, rather
+than Cq, therefore are independent of the standard curve and can be
+compared between studies that use different standard curves, 2)
+account for the data censoring at the upper limit of qPCR cycles,
+which properly accounts for uncertainty and reduces bias in the
+estimates.

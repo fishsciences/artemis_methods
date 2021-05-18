@@ -8,7 +8,7 @@ quickly did the concentration of eDNA decrease with distance? How much did the f
 volume of water increase the concentration of eDNA in the filter? We first tried to address these questions using off-the-shelf statistical models, but the results
 were not robust.
 
-The parameter estimates and confidence/credible intervals from a
+The validity of parameter estimates and Confidence/Credible Intervals from a
 statistical model are dependent upon the assumptions of the model being met. In the
 case of censored data such as data from qPCR eDNA studies, these
 assumptions do not hold for a standard linear model and a more appropriate model is needed to get
@@ -43,7 +43,7 @@ under-performed in-sample prediction relative to a standard binomial GLM, it had
 
 Environmental DNA sampling studies are often of interest where other
 forms of sampling are difficult or impossible, or to supplement an
-existing sampling procedure. The species of interest is often
+existing sampling procedure [@adams_beyond_2019]. The species of interest is often
 rare. For these situations, a standard presence/absence analysis might
 lead one to conclude absence, with uncertainty. By contrast, the workflow outlined above, while it requires the additional step of parameterizing a model for a given sampling procedure, environment, and design, allows probability statements like the following to be made: "If the species of interest were
 within 50m of our sampling site, we would have had 95% probability of detecting it." 
@@ -54,10 +54,10 @@ experience, however, setting up mechanistic models of particle
 diffusion and flow to contextualize eDNA data is difficult and 
 time-consuming, and is often not fully transferable to new environments. The `artemis` package provides a modeling framework that allows for a simple and quick method to generate probability statements from our sampling designs, which in turn allow us to quickly make decisions about eDNA survey designs. 
 
-<!--
-Discussion of when and how the truncated latent variable model
-out-performed other modeling approaches for this data Introduction of
-the artemis package and its related suite of modeling functions
-Discussion of questions and scenarios for which our model would be the
-less appropriate choice than others presented
--->
+The need for non-invasive cost-effective sampling, especially for
+low-density, cryptic, difficult to sample populations, is growing and
+will continue to drive development of molecular-based methods
+[@adams_beyond_2019].  This need also includes effective
+early-detection for invasive species [@miliangarcia_optimization_2021;
+@sepulveda_adding_2019].  Improved processing and analysis tools for molecular-based methods will lead to improved management of natural resources.
+

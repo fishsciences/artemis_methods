@@ -14,19 +14,16 @@ author:
       institute: genidaqs
   - Mark D. Bowen:
       institute: empty
-  - Matt Brennan:
-      institute: esa
   - Andrew Schultz:
       institute: bor
   - Gregg Schumer:
       institute: genidaqs
 institute:
-  - one_straw: 'One Straw Consulting, LLC, 798 Chalk Ave. Loveland, CO 80537'
+  - one_straw: 'One Straw Consulting, LLC, PO Box 7003, Loveland, CO 80537'
   - cfs: 'Cramer Fish Sciences'
   - genidaqs: Genidaqs
   - empty: 'TBD'
   - bor: 'United States Bureau of Reclamation'
-  - esa: "Environmental Science Associates"
 keywords: [Environmental DNA, qPCR, R, statistical modeling]
 geometry: margin=1in
 numbersections: true

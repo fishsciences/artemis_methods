@@ -9,8 +9,7 @@ invasive organisms in water [@fukumoto_basin-scale_2015;
 detecting eDNA using quantitative Polymerase Chain Reaction (qPCR) has
 gained popularity over the past 20 years [@dejean_improved_2012;
 @moyer_assessing_2014] and is now broadly used to sample and
-indirectly infer presence of taxa in a variety of aquatic, marine, and
-estuary environments. However, widespread sampling and detection of
+indirectly infer presence of taxa in a variety of aquatic environments. However, widespread sampling and detection of
 eDNA by ecologists and conservation biologists is unstandardized, and
 the field is in need of standards for analysis and reporting
 [@fediajevaite_metaanalysis_2021]. 

@@ -1,12 +1,7 @@
 ## Overview of `artemis` Functionality
 
 The functions included in `artemis` can be grouped into a few
-categories:
-
-  1. Modeling 
-  2. Simulation
-  3. Post-hoc analyses
-  4. Utilities
+categories: Modeling, Simulation, Post-hoc analyses, and Utilities.
 
 <!-- 
 @Von might break these into sections with subheadings at some pt,
