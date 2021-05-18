@@ -13,4 +13,7 @@ indirectly infer presence of taxa in a variety of aquatic environments. However,
 eDNA by ecologists and conservation biologists is unstandardized, and
 the field is in need of standards for analysis and reporting
 [@fediajevaite_metaanalysis_2021]. 
-
+In addition, managers need assistance to understand the biological
+significance of a set of eDNA observations: this paper describes one
+method to develop probability statements about species presence using
+a standardized eDNA sampling scheme.

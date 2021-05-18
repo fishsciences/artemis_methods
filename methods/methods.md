@@ -39,7 +39,7 @@ Valley Project (CVP). This water intake is located the southwest
 portion of the CVP in the Sacramento - San Joaquin River Delta,
 California, USA [@bowen2004].  The data used here are from an experiment completed on 2017-08-02, part
 of a series of live car experiments at the CVP in coordination with the TFCF in August-September of 2017.  All water filtering, eDNA extraction, and qPCR analysis procedures associated with the experiment
-followed those described in @schumer_utilizing_2019.  100 live (cultured)
+followed those described in @schumer_utilizing_2019.  One hundred live (cultured)
 Delta Smelt were placed in a rigid, meshed enclosure (the "live car") and suspended from the primary
 louvers in the intake channel. Two sets of three water samples each were taken
 at 10m intervals, from 10m-50m, from near to far in the downstream direction relative to the live car.  The first set of samples pulled 50mL of water through each filter; the second set of samples pulled 200mL per filter. This procedure was then replicated in the upstream direction (far to near) relative to the live car. Note that the car itself (distance = ~0m) was not actually
