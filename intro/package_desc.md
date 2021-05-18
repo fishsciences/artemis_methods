@@ -8,6 +8,8 @@ categories: Modeling, Simulation, Post-hoc analyses, and Utilities.
 for visual organization/ clarity
 -->
 
+### Modeling
+
 First, the modeling functions are intended to be drop-in replacements
 for `lm()` or `glm()` [@R] while utilizing the generative model as outlined
 previously. An example call to the modeling function `eDNA_lm()` is,
@@ -52,7 +54,10 @@ program [@stan]. In both `artemis` modeling functions, additional
 parameters can be passed to control the MCMC algorithm via the "`...`"
 arguments.
 
-Next, the simulation functions `sim_eDNA_lm()` and
+
+### Simulation
+
+The simulation functions `sim_eDNA_lm()` and
 `sim_eDNA_lmer()` allow researchers to see the implications of
 assumptions on the expected [eDNA], e.g. how [eDNA] responds to
 hypothetical environmental effects. This can be important both to

@@ -11,6 +11,8 @@ used. This standard curve formula typically takes the form:
 
 $$ Cq = \beta * log([eDNA]) + \alpha $$
 
+Where $\alpha$ is the intercept and
+$\beta$ is the slope for the standard curve. 
 A higher Cq value, i.e. more quantification cycles, corresponds to a
 lower concentration of eDNA in a sample. Above a pre-determined
 threshold, additional quantification cycles are not
