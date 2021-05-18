@@ -15,7 +15,7 @@ coef_list_art = lapply(1:4, function(i)
 
 aa = mapply(mk_coef_plot, coef_list_lmer, coef_list_art, true_vals, rownames(lmer_ests[[1]]), SIMPLIFY = FALSE)
 
-png("figs/coef_est_compare.png", 8, 5, "in", res = 300)
+pdf("figs/coef_est_compare.png", 8, 5)
 marrangeGrob(aa, nrow = 2, ncol = 2,top = "")
 dev.off()
 
@@ -32,7 +32,7 @@ d$ln_eDNA = artemis::cq_to_lnconc(d$Cq, a, b)
 v40 = artemis::cq_to_lnconc(40.0, unique(a), unique(b))
 
 
-png("figs/experimental_raw_data.png", 8, 5, "in", res = 300)
+pdf("figs/experimental_raw_data.png", 8, 5)
 
 ggplot(d, aes(x = factor(Distance_m), y = ln_eDNA)) +
   geom_jitter(
