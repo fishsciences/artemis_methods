@@ -1,42 +1,35 @@
 ## Overview of `artemis` Functionality
 
-The functions included in `artemis` can be grouped into a few
-categories: Modeling, Simulation, Post-hoc analyses, and Utilities.
+In addition to the modeling framework described above, the `artemis` package includes several utility and convenience functions associated with the planning and analysis of eDNA surveys and sampling. Taken all together, the functions in the `artemis` R package can be grouped into a few categories: Modeling, Simulation, Post-hoc analyses, and Utilities.
 
-<!-- 
-@Von might break these into sections with subheadings at some pt,
-for visual organization/ clarity
--->
 
 ### Modeling
 
-First, the modeling functions are intended to be drop-in replacements
-for `lm()` or `glm()` [@R] while utilizing the generative model as outlined
-previously. An example call to the modeling function `eDNA_lm()` is,
+The modeling functions in `artemis` are intended to be drop-in replacements
+for `lm()` or `glm()` [@R] while utilizing the generative model as described in the previous section. An example call to the modeling function `eDNA_lm()` is,
 
 ```
 eDNA_lm(Cq ~ Distance_m, 
         data = eDNA_data,
-        std_curve_alpha = 21.2, std_curve_beta = -1.5)
+        std_curve_alpha = 21.2, 
+        std_curve_beta = -1.5)
 
 ```
 
-As in `lm()`, the user provides a formula for the model in the form,
+Just as with `lm()`, the user provides a formula for the model in the form `y ~ x`, as in,
 
 ```
 Cq ~ predictors
 ```
 
-Although the model technically uses the latent variable [eDNA] as the
-response to the predictors, the formula is expressed on Cq to avoid
-potential confusion regarding the user potentially specifying a column which does
-not exist in the input data.frame. 
+The data for the model formula is supplied as a `data.frame` object passed to the `data` argument of `eDNA_lm()`. Although the model technically uses the latent variable $ln[eDNA]$ "under the hood" as the
+response to the predictors, the formula in `eDNA_lm()` is expressed on Cq, since Cq is typically present in the raw output of qPCR analysis.
 
-Internally, the conversion between Cq and [eDNA] is conducted using
+Internally, the conversion between Cq and $ln[eDNA]$ is conducted using
 standard curve coefficients provided by the user. Importantly, these
 can be specified as a vector of $\alpha_{std\_curve}$ and
-$\beta_{std\_curve}$ values. This allows the use of multiple standard
-curves within the same model. Thus, data from different studies or 
+$\beta_{std\_curve}$ values corresponding to the rows of the user's input data. This allows the use of multiple standard
+curves within the same model. Thus, data from different studies or data 
 which use multiple standard curves can
 easily be analyzed together.
 
@@ -59,36 +52,67 @@ arguments.
 
 The simulation functions `sim_eDNA_lm()` and
 `sim_eDNA_lmer()` allow researchers to see the implications of
-assumptions on the expected [eDNA], e.g. how [eDNA] responds to
+assumptions on the expected concentration of eDNA, e.g. how $ln[eDNA]$ responds to
 hypothetical environmental effects. This can be important both to
 understand effects as estimated by an `artemis` model fit to collected
-data, or as a way to design a study prior to collecting data.
+data, and/or as a way to design a study prior to collecting data.
 
 The simulation functions are based on the generative model as outlined
-previously, and function similarly to the `artemis` modeling
-functions. The relationships in the simulation are specified using a
+previously, and are populated similarly. As with the `artemis` modeling functions, 
+the relationships in the simulation are specified using a
 model formula. Then, the user provides a set of parameters (i.e. the
-"effects") for the linear model on log [eDNA], the standard curve
+"effects") for the linear model on $ln[eDNA]$, the standard curve
 coefficients, and the measurement error on Cq. Lastly, the user
 provides the covariate levels for which simulations are desired and
 the number of simulations to generate.
 
-An example of a simulation call with random effects,
+For example, a simulation call with random effects might be specified as,
 
 ```
-sim_eDNA_lmer(Cq ~ distance + volume + (1|rep) + (1|tech_rep),
-              variable_list = vars,
-              betas = c(intercept = -10.6, distance = -0.05, volume = 0.01),
-              sigma_Cq = 1,
-              sigma_rand = c(0.1, 0.1), 
+ss = sim_eDNA_lmer(Cq ~ distance + volume + (1|rep) + (1|tech_rep),
+
+              variable_list = list(Cq = 1,
+                                   distance = c(0, 10, 50),
+                                   volume = c(50, 200),
+                                   rep = 1:3,
+                                   tech_rep = 1:5),
+                                   
+              betas = c(intercept = -10.6, 
+                        distance = -0.05, 
+                        volume = 0.01),
+                        
+              sigma_ln_eDNA = 1, 
+              sigma_rand = c(0.5, 0.25),
               std_curve_alpha = 21.2,
               std_curve_beta = -1.5)
 
 ```
 
-The `artemis` package also includes methods for R's `plot()`,
+### Post-hoc analyses
+
+Often, the purpose of an eDNA sampling study is to inform a field sampling protocol. For these cases, we typically want to know how likely we are to detect eDNA, given the way that we sampled. The `est_p_detect()` function returns the calculated probability of at least one positive detection across a configuration of planned samples and technical replicates, for example,
+
+```
+est_p_detect(variable_levels = c(Intercept = 1, 
+                                            Distance = 100),
+                        betas = c(Intercept = -10.5, 
+                                  Distance = -0.03),
+                        ln_eDNA_sd = 1, 
+                        std_curve_alpha = 21.2, 
+                        std_curve_beta = -1.5,
+                        n_rep = 12:30)
+
+```
+
+would return the probability of one or more positive technical replicates for a design where the distance from source is 100 units, and the effect of distance on $ln[eDNA]$ is -0.03. The argument `n_rep` represents the product of the number of eDNA filters and the number of technical replicates analyzed for each filter, and can be supplied with a vector that corresponds to a proposed range. For example, if we planned to take 2-5 filters at each sampling point, and then analyze six technical replicates for each filter, that would correspond to the range of `n_reps = 12:30`. In this way, we can use the `est_p_detect()` function to examine the change in probability of detection for different levels and combinations of covariates, including number of filters and technical replicates.
+
+
+
+### Utilities
+
+In addition to convenience functions for converting back and forth from Cq to $ln[eDNA]$ via the parameters of a standard curve (the functions `lnconc_to_cq()`and `cq_to_lnconc()`), the `artemis` package also includes methods for R's `plot()`,
 `summary()`, `data.frame()`, and `predict()` functions for the
-`eDNA_model` and `eDNA_simulation` classes. For further information,
+`eDNA_model`, `eDNA_simulation`, and `eDNA_p_detect` classes. For further information,
 please refer to the package vignettes and tutorials at
 [`https://fishsciences.github.io/artemis/`](https://fishsciences.github.io/artemis/index.html).
 

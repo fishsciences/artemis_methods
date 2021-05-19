@@ -124,8 +124,8 @@ can provide a prior for the expected probability of "true" zero
 observations from a secondary mechanism. -->  
 
 This model formulation makes
-several assumptions: 1) $ln[eDNA]$ is assumed to be uniform within a
-sample, 2) $ln[eDNA]$ is sampled with normally distributed errors, and
+several assumptions, namely that 1) $ln[eDNA]$ is uniform within a
+sample, 2) $ln[eDNA]$ is sampled with normally-distributed errors, and
 3) there are no false detections, i.e. the measurement error cannot
 result in a positive detection when the target species' eDNA is not present in the sample.
 
