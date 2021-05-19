@@ -8,12 +8,14 @@ binomial regression [@moyer_assessing_2014; @song_making_2017;
 @hinlo_environmental_2017]. In these, the response is a binary
 variable signifying the presence/absence of eDNA in the sample. More
 accurately, this binary variable indicates whether a sample had a Cq
-value below the censoring point, i.e., the detection threshold. Presence is assumed when a sample
+value below the censoring point, i.e., the detection
+threshold. Presence is assumed when a sample
 had at least one value below this threshold, though studies vary on
 what defines the unit of study, e.g. a single detection in a technical
 replicate, filter, sampling point, or occurrence. Regardless, by using
-"off-the-shelf" statistical models and programmatic tools, these analysis methods allow for easy
-estimation of various covariates on the probability of the target species' presence.
+"off-the-shelf" statistical models and programmatic tools, these
+analysis methods allow for easy estimation of various covariates on
+the probability of the target species' presence.
 
 Using a binary response for eDNA studies has the advantage of ease of
 analysis, as many off-the-shelf statistical programs can estimate a
@@ -25,19 +27,26 @@ standard curve, which defines the ln[eDNA] that corresponds to the
 threshold value, and 2) researcher decisions. For example, in
 response to the level of sensitivity of an assay, some researchers
 might use a maximum Cq threshold of 35 cycles
-[@huver_development_2015], while others use 40 or even 45 cycles [@piggott_evaluating_2016]. Thus the ln[eDNA] which corresponds to the maximum Cq value for
-a particular set of extractions varies between studies, and therefore "presence" of a target species
-across studies can refer to different actual concentrations of eDNA in samples.
+[@huver_development_2015], while others use 40 or even 45 cycles
+[@piggott_evaluating_2016]. Thus the ln[eDNA] which corresponds to the
+maximum Cq value for a particular set of extractions varies between
+studies, and therefore "presence" of a target species across studies
+can refer to different actual concentrations of eDNA in samples.
 
 One solution to this quandary is to model either the Cq values
-themselves, the concentration, or the copy number as a continuous response variable in a linear regression, wherein the effects of various covariates on it can be estimated.  In particular,
-using the ln[eDNA] or copy number avoids some of the issues outlined above. Similar to a
-binary response variable, modeling ln[eDNA] or copy number can be accomplished
-using common statistical software. However, as with binomial implementations, the continuous Cq,
-concentration, or copy number is still associated with the detection
-threshold: since the standard curve, which is lab-dependent, defines
-the concentration at which further qPCR cycles are not attempted, the
-standard curve defines a statistical censoring point for the response variable, regardless of whether it is modeled as binary or continuous.
+themselves, the concentration, or the copy number as a continuous
+response variable in a linear regression, wherein the effects of
+various covariates on it canbe estimated.  In particular,
+using the ln[eDNA] or copy number avoids some of the issues outlined
+above. Similar to a binary response variable, modeling ln[eDNA] or
+copy number can be accomplished using common statistical
+software. However, as with binomial implementations, the continuous
+Cq, concentration, or copy number is still associated with the
+detection threshold: since the standard curve, which is lab-dependent,
+defines the concentration at which further qPCR cycles are not
+attempted, the standard curve defines a statistical censoring point
+for the response variable, regardless of whether it is modeled as
+binary or continuous.
 
 Statistical censoring is a well-studied phenomenon where data values
 above or below a certain threshold value are recorded as the threshold
@@ -80,7 +89,8 @@ from setting the standard curve in the lab prior to qPCR.
 
 Internally, the back-transformed $ln[eDNA]_i$ values are considered a
 sample with measurement error from the true $ln[eDNA]_i$ value
-($\hat{ln[eDNA]_i}$) in the extract. 
+($\hat{ln[eDNA]_i}$) in the extract, with values above the threshold
+censored to be equal to the threshold (i.e. a truncated normal distribution), 
 
 $$ ln[eDNA]_i \sim Trunc. Normal(\hat{ln[eDNA]_i}, \sigma_{Cq}, U) $$
 
@@ -111,7 +121,9 @@ mechanism. Currently, the functions do not support user-provided
 predictors on the zero-inflated component, and just estimate a flat
 probability of zero detections for all observations. However, users
 can provide a prior for the expected probability of "true" zero
-observations from a secondary mechanism. -->  This model formulation makes
+observations from a secondary mechanism. -->  
+
+This model formulation makes
 several assumptions: 1) $ln[eDNA]$ is assumed to be uniform within a
 sample, 2) $ln[eDNA]$ is sampled with normally distributed errors, and
 3) there are no false detections, i.e. the measurement error cannot
