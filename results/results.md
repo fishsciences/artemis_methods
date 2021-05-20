@@ -2,18 +2,18 @@
 
 ## Simulated data
 
-Based on 500 simulated datasets, the standard linear mixed-effects
+Based on 500 simulated data sets, the standard linear mixed-effects
 models produced biased estimates. The estimates for the four
-generative parameters (Intercept, $\beta_{distance}$, $\beta_{volume}$,
+generative model parameters (Intercept, $\beta_{distance}$, $\beta_{volume}$,
 and $\sigma$), were all skewed from the true values used to generate
-the dataset (Figure 2). One effect of this bias was the 95% Credible Intervals
+the data set (Figure 2). One effect of this bias was the 95% Credible Intervals
 produced from the standard model did not include the true values in
 14% of cases, higher than the expected rate.
 
 By contrast, the estimates produced by the censored-data
 mixed effects model in `artemis` were centered around the true
 values for all four parameters. Additionally, the 95% credible
-intervals included the true parameter values in all but 3.8% of cases, within
+intervals included the true parameter values in all but 3.8% of cases, which is within
 the expected range.
 
 ## Experimental data
@@ -25,12 +25,12 @@ predictive performance as measured by the Pareto-Smoothed
 Leave-One-Out Information Criteria suggested the `artemis` models fit
 the data better compared to widely-used
 alternatives (Table 2). Furthermore, when the parameter estimates for each model
-were used to predict data for a second set of experimental data, the
+were used to generate predictions for a second set of experimental data, the
 `artemis` models had lower Root Mean Square Error (RMSE) on the
 predictions.
 
 In a comparison between `artemis` models and a binomial mixed-effects
-model fit to the same data (Table 3), the binomial data showed both better
+model fit to the same data (Table 3), the binomial data had better
 precision and recall for the in-sample data relative to the `artemis`
 model (0.92 vs. 0.72 precision; 0.94 vs. 0.88 recall). However, when
 used to classify out-of-sample data, the binomial model's performance

@@ -79,6 +79,6 @@ prediction was then classified as a presence or an absence, according to whether
 the predicted value was below or above the detection threshold.
 Finally, to compare the classification performance for the in-sample
 and out-of-sample predictions, the precision (the proportion of
-positive predictions that were actually correct) and recall (the proportion of actual positives predicted correctly) were calculated. A precision of
+positive predictions that agree with those found in the data) and recall (the proportion of positives in the data that were correctly predicted) were calculated. A precision of
 1 indicates the model had no false positives. A recall of 1 indicates
 the model had no false negatives [@googleml].

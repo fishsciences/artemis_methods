@@ -104,7 +104,7 @@ est_p_detect(variable_levels = c(Intercept = 1,
 
 ```
 
-would return the probability of one or more positive technical replicates for a design where the distance from source is 100 units, and the effect of distance on $ln[eDNA]$ is -0.03. The argument `n_rep` represents the product of the number of eDNA filters and the number of technical replicates analyzed for each filter, and can be supplied with a vector that corresponds to a proposed range. For example, if we planned to take 2-5 filters at each sampling point, and then analyze six technical replicates for each filter, that would correspond to the range of `n_reps = 12:30`. In this way, we can use the `est_p_detect()` function to examine the change in probability of detection for different levels and combinations of covariates, including number of filters and technical replicates.
+would return the probability of one or more positive technical replicates for a design where the distance from source is 100 units, and the effect of distance on $ln[eDNA]$ is -0.03. The argument `n_rep` represents the product of the number of eDNA filters and the number of technical replicates analyzed for each filter, and can be supplied with a vector that corresponds to a proposed range. For example, if we planned to take 2-5 filters at each sampling point, and then analyze six technical replicates for each filter, that would correspond to the range of `n_rep = 12:30`. In this way, we can use the `est_p_detect()` function to examine the change in probability of detection for different levels and combinations of covariates, including number of filters and technical replicates.
 
 
 
