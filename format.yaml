@@ -22,7 +22,7 @@ institute:
   - one_straw: 'One Straw Consulting, LLC, PO Box 7003, Loveland, CO 80537'
   - cfs: 'Cramer Fish Sciences'
   - genidaqs: Genidaqs
-  - empty: 'TBD'
+  - empty: '347 Group'
   - bor: 'United States Bureau of Reclamation'
 keywords: [Environmental DNA, qPCR, R, statistical modeling]
 geometry: margin=1in
