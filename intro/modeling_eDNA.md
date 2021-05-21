@@ -1,26 +1,25 @@
 ## Common approaches to analyzing eDNA data 
 
-<!-- @Von - please insert these citations into the bib file and replace refs here -->
-
 qPCR data from eDNA studies are often modeled via a binary response
-model, e.g. occupancy models [@schmidt_site_2013; @dorazio_2018] or some form of
+model, e.g. some form of
 binomial regression [@moyer_assessing_2014; @song_making_2017;
-@hinlo_environmental_2017]. In these, the response is a binary
-variable signifying the presence/absence of eDNA in the sample. More
-accurately, this binary variable indicates whether a sample had a Cq
+@hinlo_environmental_2017] or occupancy models [@schmidt_site_2013;
+@dorazio_2018]. 
+In these, the response is a binary
+variable signifying the presence/absence of eDNA in the sample. 
+In the case of occupancy models, presence/absence is a binary latent variable
+estimated from the observed binary detection of eDNA in the sample.
+In both, a binary variable indicates whether a sample had a Cq
 value below the censoring point, i.e., the detection
-threshold. Presence is assumed when a sample
-had at least one value below this threshold, though studies vary on
-what defines the unit of study, e.g. a single detection in a technical
-replicate, filter, sampling point, or occurrence. Regardless, by using
-"off-the-shelf" statistical models and programmatic tools, these
+threshold. 
+Using standard and widely available statistical models and programmatic tools, these
 analysis methods allow for easy estimation of various covariates on
 the probability of the target species' presence.
 
 Using a binary response for eDNA studies has the advantage of ease of
-analysis, as many off-the-shelf statistical programs can estimate a
-binomial model. However, a trade-off comes with this ease of
-analysis within a study, and that is the difficulty in comparing _between_
+analysis, as many statistical programs can estimate a
+binomial model. However, this ease of
+analysis within a study comes with a trade-off - it is difficult to comparing between
 studies. Binary response models are dependent on the threshold which
 defines a non-detection. This cutoff threshold is a function of 1) the
 standard curve, which defines the ln[eDNA] that corresponds to the
@@ -34,9 +33,10 @@ studies, and therefore "presence" of a target species across studies
 can refer to different actual concentrations of eDNA in samples.
 
 One solution to this quandary is to model either the Cq values
-themselves, the concentration, or the copy number as a continuous
-response variable in a linear regression, wherein the effects of
-various covariates on it canbe estimated.  In particular,
+themselves, or the concentration/copy number as a continuous
+response variable in a linear regression. Similar to a binary
+analysis, the effects of
+various covariates on the response can be estimated.  In particular,
 using the ln[eDNA] or copy number avoids some of the issues outlined
 above. Similar to a binary response variable, modeling ln[eDNA] or
 copy number can be accomplished using common statistical

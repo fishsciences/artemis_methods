@@ -14,6 +14,6 @@ eDNA by ecologists and conservation biologists is unstandardized, and
 the field is in need of standards for analysis and reporting
 [@fediajevaite_metaanalysis_2021]. 
 In addition, managers need assistance to understand the biological
-significance of a set of eDNA observations. This paper describes one
-method to develop probability statements about species presence using
-a standardized eDNA sampling scheme.
+significance of a set of eDNA observations. This paper describes how
+probability statements about species presence can be developed using
+the `artemis` package and an eDNA sampling scheme.
