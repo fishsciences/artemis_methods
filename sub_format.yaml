@@ -1,5 +1,5 @@
 ---
-title: "The `artemis` package for eDNA analysis in R"
+title: "The `artemis` Package for Environmental DNA Analysis in R"
 header-includes: 
   - \usepackage{lineno}
   - \linenumbers

@@ -7,7 +7,8 @@ binomial regression [@moyer_assessing_2014; @song_making_2017;
 @dorazio_2018]. 
 In these, the response is a binary
 variable signifying the presence/absence of eDNA in the sample. 
-In the case of occupancy models, presence/absence is a binary latent variable
+In the case of occupancy models, presence/absence is a binary latent
+(unobserved) variable
 estimated from the observed binary detection of eDNA in the sample.
 In both, a binary variable indicates whether a sample had a Cq
 value below the censoring point, i.e., the detection
@@ -57,8 +58,8 @@ which does not take this into account (such as the linear modeling of
 Cq, eDNA concentration, or copy number described above) will overestimate
 the certainty associated with values near or at the threshold. In eDNA studies, when all ln[eDNA] or copy number values are relatively high (i.e. far from
 the censoring point) the censoring point will have negligible impact on the
-analysis. However, when there are many values near the censoring point (that is, near the limit of detection),
-estimates will be biased.
+analysis. However, when there are many values near the censoring point
+(i.e. near the limit of detection), estimates will be biased.
 
 Therefore, there is a need to take the above issues into consideration
 in eDNA analyses, while also providing the ease of use of common
@@ -66,26 +67,26 @@ statistical programs.
 
 ## Modeling qPCR eDNA Data with `artemis` {#mod_str}
 
-We created the `artemis` R package to implement Bayesian censored
+We created the `artemis` R package to implement a set of Bayesian censored
 latent variable models, which mitigate the issues with commonly-used
 statistical analysis techniques on qPCR data. At
-its core, `artemis` is a specialized Generalized Linear Model, where
-the predictors are assumed to affect the response variable additively,
-in this case $ln[eDNA]$,
+its core, `artemis` is a specialized Generalized Linear Model (GLM), where
+the predictors are assumed to affect the latent response variable
+additively,
 
 $$ ln[eDNA]_{i} = X_{i} \beta $$ 
 
 where $\beta$ is a vector of effects on $ln[eDNA]_{i}$, and $X_{i}$
 is a vector of predictors.  Since `artemis` directly models the
-effect of the predictors on the latent (unobserved) variable, $ln[eDNA]$,
+effect of the predictors on the latent variable, $ln[eDNA]$,
 it is unnecessary for the researcher to back-transform the data prior
 to modeling. Internally, `artemis` conducts this conversion using the
-user-supplied values for the formula,
+user-supplied values for the standard curve formula,
 
 $$\hat{Cq_i} = \alpha_{std\_curve} + \beta_{std\_curve}* ln[eDNA]_i  $$
 
 Where $\alpha_{std\_curve}$ and $\beta_{std\_curve}$ are fixed values
-from setting the standard curve in the lab prior to qPCR.  
+from calibration in the lab prior to qPCR.  
 
 Internally, the back-transformed $ln[eDNA]_i$ values are considered a
 sample with measurement error from the true $ln[eDNA]_i$ value
@@ -95,21 +96,24 @@ censored to be equal to the threshold (i.e. a truncated normal distribution),
 $$ ln[eDNA]_i \sim Trunc. Normal(\hat{ln[eDNA]_i}, \sigma_{Cq}, U) $$
 
 Where the observed $ln[eDNA]_i$ values are censored at the
-predetermined threshold, $U$. This threshold is back-transformed from
-the threshold on Cq. Importantly, the $\hat{ln[eDNA]}$ values in
-the model are not censored, allowing the latent variable to reflect the "true"
-log-concentration of eDNA beyond the censorship point. The likelihood that a sampled $ln[eDNA]$
-value will exceed the threshold is a function of the measurement error
-and the estimated latent $\hat{ln[eDNA]_i}$ value. We calculate this
-likelihood using the normal
-cumulative distribution function, $\Phi()$,
+predetermined concentration threshold, $U$. This threshold
+concentration value is internally calculated from
+the user-supplied threshold on Cq. 
+
+Importantly, the $\hat{ln[eDNA]}_i$ values in the model are not
+censored, allowing the latent variable to reflect the "true"
+log-concentration of eDNA beyond the censorship point. To
+appropriately condition model estimates on the censoring process, the likelihood
+that a sampled $ln[eDNA]$ value will exceed the threshold is a
+function of the measurement error and the estimated latent
+$\hat{ln[eDNA]_i}$ value. We calculate this likelihood using the
+normal cumulative distribution function, $\Phi()$,
 
 $$ Pr(ln[eDNA]_i > U ) = 1 - \Phi(\hat{ln[eDNA]_i} - \mu_i / \sigma)$$
 
 Thus, the models in `artemis` account for the data censoring process by
 estimating the probability that the observed value will exceed the
-threshold. As detection limits vary with genetic assay, the upper
-threshold on Cq in the model is specifiable by the user.
+threshold. 
 
 <!-- Lastly, there are optional zero-inflated versions of `artemis` models, implemented in the package by the functions
 `eDNA_lm_zinf()` and `eDNA_lmer_zinf()`. We included these zero-inflated versions after observing that there can be near-zero concentrations of eDNA even in
@@ -125,7 +129,8 @@ observations from a secondary mechanism. -->
 
 This model formulation makes
 several assumptions, namely that 1) $ln[eDNA]$ is uniform within a
-sample, 2) $ln[eDNA]$ is sampled with normally-distributed errors, and
+sample, 2) $ln[eDNA]$ is sampled with normally-distributed errors with
+censorship at the detection threshold, and
 3) there are no false detections, i.e. the measurement error cannot
 result in a positive detection when the target species' eDNA is not present in the sample.
 

@@ -1,6 +1,6 @@
 ---
-title: "The `artemis` package for eDNA analysis in R"
-subtitle: "An R package for the design and analysis of environmental DNA studies."
+title: "The artemis Package for Environmental DNA Analysis in R"
+subtitle: "artemis: An R package for the design and analysis of environmental DNA studies."
 author:
   - Matthew B. Espe:
       institute: one_straw

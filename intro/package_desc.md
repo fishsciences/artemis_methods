@@ -5,8 +5,10 @@ package includes several utility and convenience functions associated
 with the planning and analysis of eDNA surveys and sampling. Taken all
 together, the functions in the `artemis` R package can be grouped into
 a few categories: Modeling, Simulation, Post-hoc analyses, and
-Utilities.
-
+Utilities. Modeling and simulation are primarily introduced here, with
+detailed vignettes available for post-hoc analyses and utilities
+included in the package installation or via the package website 
+[`https://fishsciences.github.io/artemis/`](https://fishsciences.github.io/artemis/index.html).
 
 ### Modeling
 
@@ -23,12 +25,9 @@ eDNA_lm(Cq ~ Distance_m,
 
 ```
 
-Just as with `lm()`, the user provides a formula for the model in the
-form `y ~ x`, as in,
-
-```
-Cq ~ predictors
-```
+Note that the parameters for the conversion to $ln[eDNA]$ are
+user-provided.  Just as with other modeling functions in R, the user
+provides a formula for the model in the form `response ~ predictors`.
 
 The data for the model formula is supplied as a `data.frame` object
 passed to the `data` argument of `eDNA_lm()`. Although the model
@@ -45,7 +44,7 @@ input data. This allows the use of multiple standard curves within the
 same model. Thus, data from different studies or data which use
 multiple standard curves can easily be analyzed together.
 
-For mixed-effects models, the modeling function `eDNA_lmer()` can be
+For mixed- or random-effects models, the modeling function `eDNA_lmer()` can be
 used. The formula syntax follows the convention of `lmer()` [@lme4] and
 specifies the random effects in the model with,
 
@@ -58,7 +57,6 @@ Both model types are fit using a Bayesian model fit via the Stan MCMC
 program [@stan]. In both `artemis` modeling functions, additional
 parameters can be passed to control the MCMC algorithm via the "`...`"
 arguments.
-
 
 ### Simulation
 
@@ -74,33 +72,26 @@ previously, and are populated similarly. As with the `artemis`
 modeling functions, the relationships in the simulation are specified
 using a model formula. Then, the user provides a set of parameters
 (i.e. the "effects") for the linear model on $ln[eDNA]$, the standard
-curve coefficients, and the measurement error on Cq. Lastly, the user
+curve coefficients, and the measurement error on $ln[eDNA]$. Lastly, the user
 provides the covariate levels for which simulations are desired and
 the number of simulations to generate.
 
-For example, a simulation call with random effects might be specified
+For example, a simulation call might be specified
 as,
 
 ```
-ss = sim_eDNA_lmer(Cq ~ distance + volume + (1|rep) + (1|tech_rep),
-
+sim_eDNA_lm(Cq ~ distance + volume,
               variable_list = list(Cq = 1,
                                    distance = c(0, 10, 50),
-                                   volume = c(50, 200),
-                                   rep = 1:3,
-                                   tech_rep = 1:5),
-                                   
+                                   volume = c(50, 200)),
               betas = c(intercept = -10.6, 
                         distance = -0.05, 
                         volume = 0.01),
-                        
               sigma_ln_eDNA = 1, 
-              sigma_rand = c(0.5, 0.25),
               std_curve_alpha = 21.2,
               std_curve_beta = -1.5)
-
 ```
-
+<!--
 ### Post-hoc analyses
 
 Often, the purpose of an eDNA sampling study is to inform a field
@@ -145,10 +136,12 @@ and `predict()` functions for the `eDNA_model`, `eDNA_simulation`, and
 `eDNA_p_detect` classes. For further information, please refer to the
 package vignettes and tutorials at
 [`https://fishsciences.github.io/artemis/`](https://fishsciences.github.io/artemis/index.html).
+-->
 
 ### Installation
 
 The `artemis` package is available via the Comprehensive R Archive
 Network (CRAN), and can be installed from within R via
 `install.packages("artemis")`. The latest development versions is also
-available via github at [`https://github.com/fishsciences/artemis`](https://github.com/fishsciences/artemis).
+available via github at
+[`https://github.com/fishsciences/artemis`](https://github.com/fishsciences/artemis).
