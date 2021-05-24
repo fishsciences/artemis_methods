@@ -9,7 +9,7 @@ Biometry, Data Analysis, Real-Time Polymerase Chain Reaction
 (ii) The acquisition, analysis, or interpretation of the
 data: MBE, MJ, SB, CD
 
-(iii) MBE, MJ, SB, CD, MDB, GS - writing of the manuscript.
+(iii) MBE, MJ, SB, CD, MDB, GS, AS - writing of the manuscript.
 
 # Data Archiving Statement
 
