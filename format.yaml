@@ -13,7 +13,8 @@ author:
   - Cheryl A. Dean:
       institute: genidaqs
   - Mark D. Bowen:
-      institute: empty
+      institute: current
+      institute: previous
   - Andrew Schultz:
       institute: bor
   - Gregg Schumer:
@@ -22,7 +23,8 @@ institute:
   - one_straw: 'One Straw Consulting, LLC, PO Box 7003, Loveland, CO 80537'
   - cfs: 'Cramer Fish Sciences, 13300 New Airport Rd, Ste 103, Auburn, CA 95602'
   - genidaqs: 'Genidaqs, 3300 Industrial Blvd, Suite 100, West Sacramento, CA 95691'
-  - empty: 'Thomas Gast & Associates Environmental Consultants, PO Box 1137, Arcata, CA, 95518'
+  - current: 'Thomas Gast & Associates Environmental Consultants, PO Box 1137, Arcata, CA, 95518'
+  - previous: 'Environmental Science Associates, 2600 Capitol Ave # 200, Sacramento, CA 95816'
   - bor: 'United States Bureau of Reclamation, 801 I Street, Suite 140, Sacramento, CA 95814'
 keywords: [Environmental DNA, qPCR, R, statistical modeling]
 geometry: margin=1in
