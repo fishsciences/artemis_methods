@@ -13,8 +13,7 @@ author:
   - Cheryl A. Dean:
       institute: genidaqs
   - Mark D. Bowen:
-      institute: current
-      institute: previous
+      institute: [current, previous]
   - Andrew Schultz:
       institute: bor
   - Gregg Schumer:
