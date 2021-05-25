@@ -5,7 +5,7 @@ METHODS = methods/methods.md
 DISCUSSION = discussion/discussion.md discussion/future_work.md
 TABS = analysis/tables.md
 FIGS = figure_caps.md
-SECTIONS=abstract.md $(INTRO) $(METHODS) results/results.md  $(DISCUSSION) conclusion/conclusion.md acknowledgements.md $(TABS) $(FIGS)
+SECTIONS=abstract.md $(INTRO) $(METHODS) results/results.md  $(DISCUSSION) conclusion/conclusion.md $(TABS) $(FIGS)
 # FIGS = analysis/figs/coef_est_compare.png analysis/figs/experimental_raw_data.png
 FORMAT=format.yaml
 BIB=artemis.bibtex
@@ -17,7 +17,7 @@ MD=artemis_methods.md
 
 submission: $(SUBMISSION) title_page.pdf
 
-$(MANUSCRIPT): $(SECTIONS) $(FORMAT) $(FIGS) $(BIB)
+$(MANUSCRIPT): $(SECTIONS) acknowledgements.md $(FORMAT) $(FIGS) $(BIB)
 	pandoc --citeproc \
 		--lua-filter=$(LUA_FILTERS)/scholarly-metadata.lua \
         --lua-filter=$(LUA_FILTERS)/author-info-blocks.lua \

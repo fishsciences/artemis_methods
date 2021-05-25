@@ -74,7 +74,9 @@ its core, `artemis` is a specialized Generalized Linear Model (GLM), where
 the predictors are assumed to affect the latent response variable
 additively,
 
-$$ ln[eDNA]_{i} = X_{i} \beta $$ 
+\begin{equation}
+ ln[eDNA]_{i} = X_{i} \beta 
+\end{equation}
 
 where $\beta$ is a vector of effects on $ln[eDNA]_{i}$, and $X_{i}$
 is a vector of predictors.  Since `artemis` directly models the
@@ -83,7 +85,9 @@ it is unnecessary for the researcher to back-transform the data prior
 to modeling. Internally, `artemis` conducts this conversion using the
 user-supplied values for the standard curve formula,
 
-$$\hat{Cq_i} = \alpha_{std\_curve} + \beta_{std\_curve}* ln[eDNA]_i  $$
+\begin{equation}
+	\hat{Cq_i} = \alpha_{std\_curve} + \beta_{std\_curve}* ln[eDNA]_i  
+\end{equation}
 
 Where $\alpha_{std\_curve}$ and $\beta_{std\_curve}$ are fixed values
 from calibration in the lab prior to qPCR.  
@@ -93,7 +97,9 @@ sample with measurement error from the true $ln[eDNA]_i$ value
 ($\hat{ln[eDNA]_i}$) in the extract, with values above the threshold
 censored to be equal to the threshold (i.e. a truncated normal distribution), 
 
-$$ ln[eDNA]_i \sim Trunc. Normal(\hat{ln[eDNA]_i}, \sigma_{Cq}, U) $$
+\begin{equation}
+ ln[eDNA]_i \sim Trunc. Normal(\hat{ln[eDNA]_i}, \sigma_{Cq}, U) 
+\end{equation}
 
 Where the observed $ln[eDNA]_i$ values are censored at the
 predetermined concentration threshold, $U$. This threshold
@@ -109,7 +115,9 @@ function of the measurement error and the estimated latent
 $\hat{ln[eDNA]_i}$ value. We calculate this likelihood using the
 normal cumulative distribution function, $\Phi()$,
 
-$$ Pr(ln[eDNA]_i > U ) = 1 - \Phi(\hat{ln[eDNA]_i} - \mu_i / \sigma)$$
+\begin{equation}
+ Pr(ln[eDNA]_i > U ) = 1 - \Phi(\hat{ln[eDNA]_i} - \mu_i / \sigma)
+\end{equation}
 
 Thus, the models in `artemis` account for the data censoring process by
 estimating the probability that the observed value will exceed the

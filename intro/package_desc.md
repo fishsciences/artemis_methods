@@ -140,8 +140,9 @@ package vignettes and tutorials at
 
 ### Installation
 
-The `artemis` package is available via the Comprehensive R Archive
+The `artemis` package is Open-source, and is available via the Comprehensive R Archive
 Network (CRAN), and can be installed from within R via
-`install.packages("artemis")`. The latest development versions is also
+`install.packages("artemis")`. The latest development version and
+source code is also
 available via github at
 [`https://github.com/fishsciences/artemis`](https://github.com/fishsciences/artemis).

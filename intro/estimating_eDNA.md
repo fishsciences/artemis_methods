@@ -9,7 +9,9 @@ standard curve generated in the lab from the assay for the target species.  The
 standard curve is specific to the lab reagents and techniques
 used. This standard curve formula typically takes the form:
 
-$$ Cq = \beta * ln([eDNA]) + \alpha $$
+\begin{equation}
+ Cq = \beta * ln([eDNA]) + \alpha 
+\end{equation}
 
 Where $\alpha$ is the intercept and
 $\beta$ is the slope for the standard curve equation and $ln([eDNA])$ is the natural logarithmic concentration of eDNA (ln[eDNA]). These

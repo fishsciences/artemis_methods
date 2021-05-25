@@ -36,8 +36,9 @@ equidistant from 0 to 1000 m. Additionally, we simulated three filters
 per measurement and three technical replicates per filter. Note that
 while `artemis` contains similar functions to simulate data, we opted
 to replicate the data in base R, outside of `artemis`'s functions, for
-transparency.  All code can be found at
-`https://github.com/fishsciences/artemis_methods`](https://github.com/fishsciences/artemis_methods).
+transparency.  All data and code is freely available at 
+[`https://github.com/fishsciences/artemis_methods`](https://github.com/fishsciences/artemis_methods)
+[@2021_artemis].
 
 ## Experimental data 
 
@@ -68,9 +69,9 @@ near) relative to the live car. Each filter was extracted and analyzed
 three times with qPCR (three technical replications). The qPCR data
 from these experiments is plotted in Figure 1. Approval for the
 experiment was via United States Fish and Wildlife Service (protocol
-2017 §10(a)(1)(A) recovery permit TE-027742-5) and California
-Department of Fish and Wildlife (protocol 2017 MOU under Scientific
-Collecting Permit SC-005544).
+2017 §10(a)(1)(A) recovery permit REDACTED<!--TE-027742-5-->) and California
+Department of Fish and Wildlife (REDACTED<!--protocol 2017 MOU under Scientific
+Collecting Permit SC-005544-->).
 
 To model the experimental data, we assume a fixed effect of distance
 (m) and volume sampled (mL). For mixed-effects models, we assume a

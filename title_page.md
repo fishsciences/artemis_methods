@@ -9,8 +9,14 @@ Biometry, Data Analysis, Real-Time Polymerase Chain Reaction
 (ii) The acquisition, analysis, or interpretation of the
 data: MBE, MJ, SB, CD
 
-(iii) MBE, MJ, SB, CD, MDB, GS, AS - writing of the manuscript.
+(iii) Writing of the manuscript: MBE, MJ, SB, CD, MDB, GS, AS - 
 
 # Data Archiving Statement
 
-All data and analysis code is available at [`https://github.com/fishsciences/artemis_methods`](https://github.com/fishsciences/artemis_methods)
+The data that support the findings of this study are openly available
+in the manuscript repository at [`https://github.com/fishsciences/artemis_methods`](https://github.com/fishsciences/artemis_methods)
+
+# Conflict of Interest
+
+MBE is a consultant hired by Cramer Fish Sciences to develop and
+maintain this software. 
