@@ -32,7 +32,7 @@ d$ln_eDNA = artemis::cq_to_lnconc(d$Cq, a, b)
 v40 = artemis::cq_to_lnconc(40.0, unique(a), unique(b))
 
 
-pdf("figs/experimental_raw_data.png", 8, 5)
+pdf("figs/experimental_raw_data.pdf", 8, 5)
 
 ggplot(d, aes(x = factor(Distance_m), y = ln_eDNA)) +
   geom_jitter(
